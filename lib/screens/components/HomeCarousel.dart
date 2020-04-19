@@ -19,25 +19,19 @@ class HomeCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-    options:CarouselOptions(
-        height: 420,
+    return CarouselSlider.builder(
+      options:CarouselOptions(
+        height: 430,
         viewportFraction: 0.85,
-        initialPage: 0,
         enlargeCenterPage: true,
         reverse: false,
         enableInfiniteScroll: true,
         scrollDirection: Axis.horizontal,
-    ),
-    
-    
-    
-    items: imgList.map((bgcard) {
-      return CarouselCard(bgcard:bgcard);
-    }).toList(),
+      ),
+      itemCount: 4,
+      itemBuilder: (BuildContext context, int itemIndex) =>CarouselCard(bgcard:imgList[itemIndex]),
 
+    );
     
-    
-        );
   }
 }
