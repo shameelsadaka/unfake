@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1087247994845",
+    "firebase_url": "https://itstrue-project.firebaseio.com",
+    "project_id": "itstrue-project",
+    "storage_bucket": "itstrue-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087247994845:android:3884d6921bbd7f9f7b7034",
+        "android_client_info": {
+          "package_name": "com.shameel.itstrue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087247994845-7t22avejeae9d8ore3up1seuagt62u60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Ge4G1r8mkR1QsvujPfMlOt_HOJp5CXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087247994845-7t22avejeae9d8ore3up1seuagt62u60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
