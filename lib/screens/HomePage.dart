@@ -53,8 +53,10 @@ class _HomePageState extends State<HomePage> {
                       child: Padding(
                         padding: const EdgeInsets.only(left:15.0,right: 10.0),
                         child: new TextField(
-                          textAlignVertical: TextAlignVertical.top
-                          ,
+                          style: TextStyle(
+                            fontSize: 12.0,
+                          ),
+                          textAlignVertical: TextAlignVertical.top,
                           decoration: InputDecoration(
                             border:InputBorder.none,
                             hintText: 'Search Using Post ID',

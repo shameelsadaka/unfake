@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'CarouselCard.dart';
+import '../templates/CardTemplate.dart';
 
 
 class HomeCarousel extends StatelessWidget {
@@ -8,12 +9,12 @@ class HomeCarousel extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  int _current = 0;
-  List imgList =  [
-    'assets/images/cards/red.png',
-    'assets/images/cards/blue.png',
-    'assets/images/cards/cyan.png',
-    'assets/images/cards/green.png',
+  List cardList =  [
+    new CardTemplate.blueCard(),
+    new CardTemplate.redCard(),
+    new CardTemplate.greenCard(),
+    new CardTemplate.yellowCard(),
+    new CardTemplate.cyanCard(),
   ];
 
 
@@ -28,8 +29,8 @@ class HomeCarousel extends StatelessWidget {
         enableInfiniteScroll: true,
         scrollDirection: Axis.horizontal,
       ),
-      itemCount: 4,
-      itemBuilder: (BuildContext context, int itemIndex) =>CarouselCard(bgcard:imgList[itemIndex]),
+      itemCount: cardList.length,
+      itemBuilder: (BuildContext context, int itemIndex) =>CarouselCard(cardTemplate:cardList[itemIndex]),
 
     );
     
