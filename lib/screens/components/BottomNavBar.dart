@@ -23,9 +23,9 @@ class BottomNavBar extends StatelessWidget {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: bottomIcons.map((item){
-          return item == null?new SizedBox(width: 50):BottomNavBarItemUI(icon:item.icon,isActive: ModalRoute.of(context).settings.name == item.routeName);
+          return item == null?new SizedBox(width: 20):BottomNavBarItemUI(icon:item.icon,isActive: ModalRoute.of(context).settings.name == item.routeName);
         }).toList(),
       ),
     );
@@ -56,14 +56,12 @@ class BottomNavBarItemUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return IconButton(
       onPressed: null,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 0,vertical:20.0), 
-        child: Icon(
-          icon,
-          color: isActive?Theme.of(context).primaryColor:Colors.black,
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 0,vertical:20.0), 
+      icon: Icon(
+        icon,
+        color: isActive?Theme.of(context).primaryColor:Colors.black,
       ),
     );
   }
