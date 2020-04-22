@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class CardTemplate {
  
-  String bgImageName;
+  String _bgImageName;
  
   Color titleColor,messageBoxColor,messageColor,subtextColor,miniTitleColor,footerTextColor;
 
@@ -13,7 +13,7 @@ class CardTemplate {
   // Card Templates
 
   CardTemplate.redCard(){
-    this.bgImageName = 'red.png';    
+    this._bgImageName = 'red.png';    
     this.titleColor = Color(0xFFC40C0C);
     this.messageBoxColor = Color(0x10FF0027);
     this.messageColor = Color(0xFFAE3031);
@@ -22,7 +22,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x99450404);
   }  
   CardTemplate.blueCard(){
-    this.bgImageName = 'blue.png';    
+    this._bgImageName = 'blue.png';    
     this.titleColor = Color(0xFF480ead);
     this.messageBoxColor = Color(0x10480ead);
     this.messageColor = Color(0xFF240063);
@@ -31,7 +31,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x9932035e);
   }
   CardTemplate.greenCard(){
-    this.bgImageName = 'green.png';    
+    this._bgImageName = 'green.png';    
     this.titleColor = Color(0xFF045c2d);
     this.messageBoxColor = Color(0x100b7a29);
     this.messageColor = Color(0xFF006132);
@@ -40,7 +40,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x9908422d);
   }  
   CardTemplate.yellowCard(){
-    this.bgImageName = 'yellow.png';    
+    this._bgImageName = 'yellow.png';    
     this.titleColor = Color(0xFFad6800);
     this.messageBoxColor = Color(0x10ad6800);
     this.messageColor = Color(0xFF6e4302);
@@ -49,7 +49,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x994f441a);
   }
   CardTemplate.cyanCard(){
-    this.bgImageName = 'cyan.png';    
+    this._bgImageName = 'cyan.png';    
     this.titleColor = Color(0xFF127ba1);
     this.messageBoxColor = Color(0x10127ba1);
     this.messageColor = Color(0xFF1e5878);
@@ -65,7 +65,7 @@ class CardTemplate {
   ///
   
   String get bgImage {
-    return 'assets/images/cards/'+bgImageName;
+    return 'assets/images/cards/'+_bgImageName;
   }
 
   
