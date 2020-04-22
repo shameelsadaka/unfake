@@ -170,13 +170,33 @@ class _HomePageState extends State<HomePage> {
                     _searchString == ""?
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 3.0),
-                      child: Text(
-                        'Enter Post Unique ID to search',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.0
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Enter Post Unique ID to search',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.0
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Center(
+                            child: FlatButton(
+                              splashColor: Colors.transparent,  
+                              highlightColor: Colors.transparent,
+                              child: Column(
+                                children: <Widget>[
+                                  Icon(Icons.cancel,size: 25,color: Colors.grey[400]),
+                                  Text("Cancel",style: TextStyle(color: Colors.grey[400])),
+                                ],
+                              ) ,
+                              onPressed: _unfocusSearchBox
+                            ),
+                          ),
+                          
+                        ],
                       ),
                     )
                     :
