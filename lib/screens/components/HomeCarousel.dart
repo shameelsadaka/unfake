@@ -22,7 +22,7 @@ class HomeCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options:CarouselOptions(
-        height: 430,
+        height: MediaQuery.of(context).size.height * 0.6 ,
         viewportFraction: 0.85,
         enlargeCenterPage: true,
         reverse: false,
