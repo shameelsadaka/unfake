@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itstrue/screens/LoginPage.dart';
 
 
 //Components
@@ -34,9 +35,18 @@ class _HomePageState extends State<HomePage> {
                         image: AssetImage('assets/images/unfake-logo.png'),
                         height: 25.0,
                       ),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/avatar.png'),
+                      FlatButton(
+                        child:CircleAvatar(
+                          backgroundImage: AssetImage('assets/images/avatar.png'),
+
+                        ),
+    onPressed: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => LoginPage()),
+    );}
                       )
+
                     ],
                   ),
                 ),

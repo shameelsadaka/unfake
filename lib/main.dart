@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
-
+import 'screens/LoginPage.dart';
 
 import 'screens/HomePage.dart';
 
@@ -20,6 +20,7 @@ class ItsTrueApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/home':(context)=>HomePage(),
+        '/auth':(context)=>LoginPage(),
       },
     );
   }
