@@ -6,7 +6,7 @@ class CardData{
   String cardTemplateCode;
   CardTemplate cardTemplate;
 
-  String postId,title,thumbnail,requesterId,requesterName,requesterPosition;
+  String postId,title,thumbnail,requesterId,requesterName,requesterTitle;
   List<String> contacts;
 
   List<CardMessage> messages;
@@ -21,14 +21,35 @@ class CardData{
     this.thumbnail,
     this.requesterId,
     this.requesterName,
-    this.requesterPosition,
+    this.requesterTitle,
     this.messages,
+    this.contacts,
     this.isVerified,
     this.footerText,
   });
+  
+
+  factory CardData.fromJson(Map<String, dynamic> json) {
+    return CardData(
+      uid:json['uid'],
+      postId:json['postId'],
+      title:json['title'],
+      thumbnail:json['thumbnail'],
+      requesterId:json['requesterId'],
+      requesterName:json['requesterName'],
+      requesterTitle:json['requesterTitle'],
+      // messages:json['messages'],
+      // contacts:json['contacts'],
+      isVerified:json['isVerified'],
+      footerText:json['footerText'],
+    );
+  }
+  
 
 }
 class CardMessage {
   String body;
   DateTime time;
+
+  
 }
