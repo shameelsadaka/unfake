@@ -27,9 +27,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
 
-    _isSearching = true;
+    _isSearching = false;
     _searchBoxFocus.addListener(_onSearchBoxFocusChange);
-    _searchString = "hello";
+    _searchString = null;
     _searchBoxController.addListener(_updateSearchString);
   }
 
