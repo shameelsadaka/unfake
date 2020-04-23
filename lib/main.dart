@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'theme.dart';
+import 'AppLayout.dart';
 
 
 import 'screens/HomePage.dart';
@@ -19,7 +21,7 @@ class ItsTrueApp extends StatelessWidget {
       theme: getThemeData(), // Theme Data is Set in theme.dart
       initialRoute: '/home',
       routes: {
-        '/home':(context)=>HomePage(),
+        '/home':(context)=>AppLayout(body:HomePage()),
       },
     );
   }

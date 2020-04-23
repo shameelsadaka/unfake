@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 //Components
 import 'components/HomeCarousel.dart';
-import 'components/BottomNavBar.dart';
 
 
 bool isEmpty(String s) => s == null || s.isEmpty;
@@ -85,157 +84,121 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: SafeArea(
-        child: WillPopScope(
-          onWillPop: _unfocusSearchBox,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+    return WillPopScope(
+      onWillPop: _unfocusSearchBox,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
 
+          SizedBox(height: 20),
 
-
-
-              // Header
-  
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage('assets/images/unfake-logo.png'),
-                      height: 25.0,
+          
+          // Search Box
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.grey[200],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 25.0, right: 15.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      focusNode: _searchBoxFocus,
+                      controller: _searchBoxController,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Search for Posts',
+                      )
                     ),
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/avatar.png'),
+                  ),
+                  (        
+                    isEmpty(_searchString)?
+                    Icon(Icons.search):
+                    IconButton(
+                      icon: Icon(Icons.cancel),
+                      onPressed: _clearSearchBox,
                     )
-                  ],
-                ),
+                  )
+                ],
               ),
+            ),
+          ),
+          
 
 
-              SizedBox(height: 20),
 
-              
-              // Search Box
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey[200],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 25.0, right: 15.0),
-                  child: Row(
+          // Search Results
+          Visibility(
+            visible:  _isSearching,
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+              child: (
+                _searchString == ""?
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 3.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          focusNode: _searchBoxFocus,
-                          controller: _searchBoxController,
-                          style: TextStyle(
-                            fontSize: 15.0,
-                          ),
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Search for Posts',
-                          )
+                      Text(
+                        'Enter Post Unique ID to search',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.0
                         ),
                       ),
-                      (        
-                        isEmpty(_searchString)?
-                        Icon(Icons.search):
-                        IconButton(
-                          icon: Icon(Icons.cancel),
-                          onPressed: _clearSearchBox,
-                        )
-                      )
+                      SizedBox(height: 30),
+                      Center(
+                        child: FlatButton(
+                          splashColor: Colors.transparent,  
+                          highlightColor: Colors.transparent,
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.cancel,size: 25,color: Colors.grey[400]),
+                              Text("Cancel",style: TextStyle(color: Colors.grey[400])),
+                            ],
+                          ) ,
+                          onPressed: _unfocusSearchBox
+                        ),
+                      ),
+                      
                     ],
                   ),
-                ),
+                )
+                :
+                Container(
+                  margin: EdgeInsets.only(top:30),
+                  child: Center(
+                    child: CircularProgressIndicator(strokeWidth: 2,valueColor: new AlwaysStoppedAnimation<Color>(Colors.green))
+                  )
+                )
               ),
-              
-
-
-
-              // Search Results
-              Visibility(
-                visible:  _isSearching,
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                  child: (
-                    _searchString == ""?
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 3.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Enter Post Unique ID to search',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.0
-                            ),
-                          ),
-                          SizedBox(height: 30),
-                          Center(
-                            child: FlatButton(
-                              splashColor: Colors.transparent,  
-                              highlightColor: Colors.transparent,
-                              child: Column(
-                                children: <Widget>[
-                                  Icon(Icons.cancel,size: 25,color: Colors.grey[400]),
-                                  Text("Cancel",style: TextStyle(color: Colors.grey[400])),
-                                ],
-                              ) ,
-                              onPressed: _unfocusSearchBox
-                            ),
-                          ),
-                          
-                        ],
-                      ),
-                    )
-                    :
-                    Container(
-                      margin: EdgeInsets.only(top:30),
-                      child: Center(
-                        child: CircularProgressIndicator(strokeWidth: 2,valueColor: new AlwaysStoppedAnimation<Color>(Colors.green))
-                      )
-                    )
-                  ),
-                ),
-              ),
-              
-
-
-              // Card List
-              Visibility(
-                visible:  !_isSearching,
-                child:Container(
-                  margin: EdgeInsets.only(top:15), 
-                  alignment: Alignment.center,
-                  child: HomeCarousel()
-                ),
-              )
-
-              
-              
-            ],
+            ),
           ),
-        ),
+          
+
+
+          // Card List
+          Visibility(
+            visible:  !_isSearching,
+            child:Container(
+              margin: EdgeInsets.only(top:15), 
+              alignment: Alignment.center,
+              child: HomeCarousel()
+            ),
+          )
+
+          
+          
+        ],
       ),
-      bottomNavigationBar: BottomNavBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Create New Post',
-        child: Icon(Icons.add, size: 30.0),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
