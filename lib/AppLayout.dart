@@ -20,8 +20,9 @@ class AppLayout extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            
 
 
 
