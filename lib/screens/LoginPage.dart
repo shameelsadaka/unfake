@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       emailField,
-                      Divider(color: Colors.black26),
+                      Divider(color: Colors.black26,height: 3),
                       passwordFeild          
                     ],
                   ),
