@@ -38,18 +38,20 @@ class SignUpPage extends StatelessWidget {
 
 
   final phoneField = Container(
-    margin: EdgeInsets.symmetric(horizontal: 5,vertical:3),
-    child:TextField(
-      style: TextStyle(
-        fontSize: 14.0,
-      ),
-      textAlignVertical: TextAlignVertical.center,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        prefixIcon: Icon(Icons.phone,color: Colors.black,size: 18),
-        hintText: 'Phone Number',
+      margin: EdgeInsets.symmetric(horizontal: 5,vertical:3),
+      child:TextField(
+          keyboardType: TextInputType.number,
+          style: TextStyle(
+            fontSize: 15.0,
+          ),
+          textAlignVertical: TextAlignVertical.center,
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              prefixIcon: Icon(Icons.phone,color: Colors.black,size: 18),
+              hintText: 'Enter Phone Number',
+              prefixText: '+91'
+          )
       )
-    )
   );
 
 
@@ -120,8 +122,6 @@ class SignUpPage extends StatelessWidget {
                         emailField,
                         Divider(color: Colors.black26,height: 3),
                         phoneField,
-                        Divider(color: Colors.black26,height: 3),
-                        passwordFeild          
                       ],
                     ),
                   ),
@@ -136,8 +136,20 @@ class SignUpPage extends StatelessWidget {
                       'Sign Up',
                       style: TextStyle(fontSize: 15)
                     ),
+                  ),
+                  SizedBox(height: 20),
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
+                    color: Theme.of(context).primaryColor,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    child: const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 15)
+                    ),
                   )
-                  
 
                   
                   

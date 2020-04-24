@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 //Components
 import 'screens/components/BottomNavBar.dart';
-
+import 'screens/LoginPage.dart';
+import 'screens/SignUpPage.dart';
 
 
 
@@ -40,7 +41,10 @@ class AppLayout extends StatelessWidget {
                     height: 25.0,
                   ),
                   IconButton(
-                    onPressed: null,
+
+                    onPressed: (){
+                      Navigator.pushNamed(context, '/login');
+                    },
                     icon: Icon(Icons.person,color: Colors.black,),
                   )
                 ],

@@ -21,7 +21,7 @@ class ItsTrueApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: getThemeData(), // Theme Data is Set in theme.dart
-      initialRoute: '/signup',
+      initialRoute: '/home',
       routes: {
         '/home':(context)=>AppLayout(body:HomePage()),
         '/login':(context)=>AppLayout(body:LoginPage()),

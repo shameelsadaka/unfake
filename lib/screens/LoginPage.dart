@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:itstrue/screens/SignUpPage.dart';
 
 class LoginPage extends StatelessWidget {
   
 
-  final emailField = Container(
+  final phoneField = Container(
     margin: EdgeInsets.symmetric(horizontal: 5,vertical:3),
     child:TextField(
+      maxLength: 10,
+      keyboardType: TextInputType.number,
       style: TextStyle(
         fontSize: 15.0,
       ),
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         border: InputBorder.none,
-        prefixIcon: Icon(Icons.email,color: Colors.black,size: 18),
-        hintText: 'Email',
+        prefixIcon: Icon(Icons.phone,color: Colors.black,size: 18),
+        hintText: 'Enter Phone Number',
+        prefixText: '+91'
       )
     )
   );
@@ -79,9 +83,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
-                      emailField,
-                      Divider(color: Colors.black26,height: 3),
-                      passwordFeild          
+                      phoneField,
                     ],
                   ),
                 ),
@@ -96,8 +98,20 @@ class LoginPage extends StatelessWidget {
                     'Login',
                     style: TextStyle(fontSize: 15)
                   ),
+                ),
+                SizedBox(height: 20),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  child: const Text(
+                      'Signup',
+                      style: TextStyle(fontSize: 15)
+                  ),
                 )
-
                 
                 
               ]
