@@ -8,9 +8,7 @@ class CarouselCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (BuildContext context) {
-        return Container(
+    return Container(
           decoration: BoxDecoration(
               boxShadow: [
                 new BoxShadow(
@@ -254,8 +252,6 @@ class CarouselCard extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
   }
 }
 

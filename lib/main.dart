@@ -7,6 +7,7 @@ import 'AppLayout.dart';
 import 'screens/HomePage.dart';
 import 'screens/LoginPage.dart';
 import 'screens/SignUpPage.dart';
+import 'screens/PostViewPage.dart';
 
 
 void main() {
@@ -21,11 +22,12 @@ class ItsTrueApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: getThemeData(), // Theme Data is Set in theme.dart
-      initialRoute: '/signup',
+      initialRoute: '/post',
       routes: {
         '/home':(context)=>AppLayout(body:HomePage()),
         '/login':(context)=>AppLayout(body:LoginPage()),
         '/signup':(context)=>AppLayout(body:SignUpPage()),
+        '/post':(context)=>AppLayout(body:PostViewPage()),
       },
     );
   }
