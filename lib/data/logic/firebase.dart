@@ -3,14 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 class FireBaseUser {
   String verificationId;
-
+  final databaseReference = FirebaseDatabase.instance.reference();
   Future loginStatus() async {
     var isLoggedin = await FirebaseAuth.instance.currentUser();
     if (isLoggedin != null) {
-      print("Returned True from firebase function");
       return true;
     } else {
-      print("Returned False from firebase function");
       return false;
     }
   }
@@ -18,12 +16,28 @@ class FireBaseUser {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
-Future writeProfile() async{
-  final databaseReference = FirebaseDatabase.instance.reference();
+ Future<String> userUid() async{
+    var uid = await FirebaseAuth.instance.currentUser();
+    return uid.uid;
+  }
+Future writeProfile(name,designation) async{
+  try{
+    var auth =userUid().then((value) {
+      databaseReference.child('users').child(value).set({
+        'name':name,
+        'designation': designation
+            });
+
+    });
+    }
+  catch(e){
+    print(e.details);
+  }
+  }
+
+
   //ToDo Complete Firebase storing Code
 
-
-}
   Future<bool> verifyPhone(phoneNumber) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
       this.verificationId = verId;

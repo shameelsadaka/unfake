@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:itstrue/data/logic/firebase.dart';
 
 class ProfilePage extends StatelessWidget {
 
 
 
 
-
+final _auth = FireBaseUser();
+final name = TextEditingController();
+final designation = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -43,7 +46,9 @@ class ProfilePage extends StatelessWidget {
 
                   SizedBox(height: 20),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _auth.writeProfile(name.text, designation.text);
+                    },
                     color: Theme.of(context).primaryColor,
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -66,6 +71,7 @@ class ProfilePage extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: TextField(
+          controller: name,
             style: TextStyle(
               fontSize: 14.0,
             ),
@@ -82,6 +88,7 @@ class ProfilePage extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: TextField(
+          controller: designation,
             style: TextStyle(
               fontSize: 14.0,
             ),
@@ -89,7 +96,7 @@ class ProfilePage extends StatelessWidget {
             decoration: InputDecoration(
               border: InputBorder.none,
               prefixIcon: Icon(Icons.description, color: Colors.black, size: 18),
-              hintText: 'Enter a valid Designation',
+              hintText: 'Enter your Designation',
             )
         )
     );

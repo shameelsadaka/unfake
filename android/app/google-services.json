@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1087247994845-or8q15qbu3hv12ijmlkqp7amkib7h5vq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shameel.itstrue",
+            "certificate_hash": "ef955e1ce3a119fca0a3754332929cf885a5bf5f"
+          }
+        },
+        {
           "client_id": "1087247994845-7t22avejeae9d8ore3up1seuagt62u60.apps.googleusercontent.com",
           "client_type": 3
         }
