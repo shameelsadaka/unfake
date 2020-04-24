@@ -6,7 +6,7 @@ import 'AppLayout.dart';
 
 import 'screens/HomePage.dart';
 import 'screens/LoginPage.dart';
-import 'screens/SignUpPage.dart';
+import 'screens/profilePage.dart';
 
 
 void main() {
@@ -25,7 +25,7 @@ class ItsTrueApp extends StatelessWidget {
       routes: {
         '/home':(context)=>AppLayout(body:HomePage()),
         '/login':(context)=>AppLayout(body:LoginPage()),
-        '/signup':(context)=>AppLayout(body:SignUpPage()),
+        '/profile':(context)=>AppLayout(body:ProfilePage()),
       },
     );
   }
