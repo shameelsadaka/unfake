@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:itstrue/data/logic/firebase.dart';
 
 class LoginPage extends StatelessWidget {
+  String errorMessage;
   String code;
   String PhoneNumber;
   final _auth = FireBaseUser();
 
   @override
   void initState() {
-
+    errorMessage = null;
   }
-    @override
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
@@ -70,7 +71,6 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                   child: const Text('Login', style: TextStyle(fontSize: 15)),
                 ),
-
               ])),
     );
   }
@@ -123,7 +123,6 @@ class LoginPage extends StatelessWidget {
                   } else {
                     Navigator.of(context).pop();
                     _auth.signIn(this.code);
-
                   }
                 },
               )

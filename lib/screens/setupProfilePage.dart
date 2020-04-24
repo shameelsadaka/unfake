@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:itstrue/data/logic/firebase.dart';
 
-class ProfilePage extends StatelessWidget {
+class SetupProfilePage extends StatelessWidget {
 
 
 
