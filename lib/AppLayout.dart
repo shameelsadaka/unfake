@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:itstrue/data/logic/firebase.dart';
 
 //Components
 import 'screens/components/BottomNavBar.dart';
-
+import 'screens/LoginPage.dart';
 
 
 
@@ -40,7 +41,19 @@ class AppLayout extends StatelessWidget {
                     height: 25.0,
                   ),
                   IconButton(
-                    onPressed: null,
+
+                    onPressed: (){
+                      final _auth  = FireBaseUser();
+                      _auth.loginStatus().then((value) {
+                        if(value == true) {
+                          Navigator.pushNamed(context, '/profile');
+                        }
+                        else{
+                          Navigator.pushNamed(context, '/login');
+                        }
+                      });
+
+                    },
                     icon: Icon(Icons.person,color: Colors.black,),
                   )
                 ],
