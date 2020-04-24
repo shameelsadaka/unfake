@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 //Here Happens all the Firebase Integrations...
 import 'package:firebase_database/firebase_database.dart';
+
 class FireBaseUser {
   String verificationId;
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -16,25 +17,24 @@ class FireBaseUser {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
- Future<String> userUid() async{
+
+  Future<String> userUid() async {
     var uid = await FirebaseAuth.instance.currentUser();
     return uid.uid;
   }
-Future writeProfile(name,designation) async{
-  try{
-    var auth =userUid().then((value) {
-      databaseReference.child('users').child(value).set({
-        'name':name,
-        'designation': designation
-            });
 
-    });
+  Future writeProfile(name, designation) async {
+    try {
+      var auth = userUid().then((value) {
+        databaseReference
+            .child('users')
+            .child(value)
+            .set({'name': name, 'designation': designation});
+      });
+    } catch (e) {
+      print(e.details);
     }
-  catch(e){
-    print(e.details);
   }
-  }
-
 
   //ToDo Complete Firebase storing Code
 
