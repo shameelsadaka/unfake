@@ -9,8 +9,6 @@ class PostViewPage extends StatefulWidget {
   _PostViewPageState createState() => _PostViewPageState();
 }
 
-enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
-
 class _PostViewPageState extends State<PostViewPage> {
 
   bool _viewUpdates;
