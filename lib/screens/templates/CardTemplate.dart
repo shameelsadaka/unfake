@@ -8,6 +8,22 @@ class CardTemplate {
 
 
   // CardTemplate(); 
+  factory CardTemplate.fromColor(String color){
+    switch(color){
+      case "red":
+        return  CardTemplate.redCard(); 
+      case "blue":
+        return  CardTemplate.blueCard(); 
+      case "green":
+        return  CardTemplate.greenCard(); 
+      case "yellow":
+        return  CardTemplate.yellowCard(); 
+      case "cyan":
+        return  CardTemplate.cyanCard(); 
+      default:
+        return CardTemplate.redCard();
+    }
+  }
 
 
   // Card Templates
