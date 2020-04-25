@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:itstrue/data/logic/firebase.dart';
-
+import 'package:itstrue/data/logic/controller.dart';
 class ProfilePage extends StatelessWidget {
 
 
 
 
-final _auth = FireBaseUser();
 final name = TextEditingController();
+final data = DataHandler();
 final designation = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -35,6 +34,7 @@ final designation = TextEditingController();
                       
                       RaisedButton.icon(
                         onPressed: () {
+                          data.createCard();
                           print("Clicked on Add Post");
                         },
                         color: Theme.of(context).primaryColor,
@@ -53,7 +53,7 @@ final designation = TextEditingController();
 
                       RaisedButton.icon(
                         onPressed: () {
-                          _auth.signOut();
+                          data.signOut();
                           Navigator.of(context).pushNamed('/login');
                         },
                         color: Theme.of(context).primaryColor,
