@@ -1,55 +1,59 @@
-import '../../screens/templates/CardTemplate.dart';
+import 'package:itstrue/screens/templates/CardTemplate.dart';
+class CardDatas {
+  final String postId;
+  final String title;
+  final String template;
+  final String thumbnail;
+  final String requesterId;
+  final String requesterName;
+  final String requesterTitle;
+  final bool isVerified;
+  final int verifiedCount;
+  final List<Message> message;
+  final List<String> contacts;
 
-class CardData{
-  int uid;
-  
-  String cardTemplateCode;
-  CardTemplate cardTemplate;
+  CardDatas(
+      {this.postId,
+      this.title,
+      this.template,
+      this.thumbnail,
+      this.requesterId,
+      this.requesterName,
+      this.requesterTitle,
+      this.isVerified,
+      this.verifiedCount,
+      this.message,
+      this.contacts});
 
-  String postId,title,thumbnail,requesterId,requesterName,requesterTitle;
-  List<String> contacts;
-
-  List<CardMessage> messages;
-
-  bool isVerified;
-  String footerText;
-
-  CardData({
-    this.uid,
-    this.postId,
-    this.title,
-    this.thumbnail,
-    this.requesterId,
-    this.requesterName,
-    this.requesterTitle,
-    this.messages,
-    this.contacts,
-    this.isVerified,
-    this.footerText,
-  });
-  
-
-  factory CardData.fromJson(Map<String, dynamic> json) {
-    return CardData(
-      uid:json['uid'],
-      postId:json['postId'],
-      title:json['title'],
-      thumbnail:json['thumbnail'],
-      requesterId:json['requesterId'],
-      requesterName:json['requesterName'],
-      requesterTitle:json['requesterTitle'],
-      // messages:json['messages'],
-      // contacts:json['contacts'],
-      isVerified:json['isVerified'],
-      footerText:json['footerText'],
+  factory CardDatas.fromJson(Map<String, dynamic> json) {
+    var list = json['message'] as List;
+    print(list.runtimeType);
+    List<Message> messageList = list.map((i) => Message.fromJson(i)).toList();
+    return CardDatas(
+      postId: json['postId'],
+      title: json['title'],
+      template: json['template'],
+      thumbnail: json['thumbnail'],
+      requesterId: json['requesterId'],
+      requesterName: json['requesterName'],
+      requesterTitle: json['requesterTitle'],
+      isVerified: json['isVerified'],
+      verifiedCount: json['verifiedCount'],
+      contacts: json['contacts'],
+      message: messageList
     );
   }
-  
-
 }
-class CardMessage {
-  String body;
-  DateTime time;
 
-  
+class Message {
+  final String body;
+  final String time;
+
+  Message({this.body, this.time});
+  factory Message.fromJson(Map<String, dynamic> parsedJson){
+    return Message(
+        body:parsedJson['body'],
+        time:parsedJson['time']
+    );
+  }
 }
