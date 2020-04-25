@@ -30,7 +30,7 @@ class _PostViewPageState extends State<PostViewPage> {
     super.initState();
   }
 
-  void postPopupMenuAction(String action) {
+  void postAction(String action) {
     print(action);
 
     ///
@@ -120,7 +120,7 @@ class _PostViewPageState extends State<PostViewPage> {
 
                     PopupMenuButton<String>(
                       icon: Icon(Icons.more_horiz),
-                      onSelected: postPopupMenuAction,
+                      onSelected: postAction,
                       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                         PopupMenuItem(
                           value: "report",
