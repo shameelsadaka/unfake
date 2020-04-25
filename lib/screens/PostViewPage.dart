@@ -9,6 +9,8 @@ class PostViewPage extends StatefulWidget {
   _PostViewPageState createState() => _PostViewPageState();
 }
 
+enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
+
 class _PostViewPageState extends State<PostViewPage> {
 
   bool _viewUpdates;
@@ -26,6 +28,16 @@ class _PostViewPageState extends State<PostViewPage> {
   @override void initState() {
     _viewUpdates = false;
     super.initState();
+  }
+
+  void postPopupMenuAction(String action) {
+    print(action);
+
+    ///
+    ///   To be expanded
+    ///   TODO
+    ///
+    
   }
 
   @override
@@ -58,7 +70,7 @@ class _PostViewPageState extends State<PostViewPage> {
                 padding:
                     EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     // Post ID
 
@@ -85,6 +97,10 @@ class _PostViewPageState extends State<PostViewPage> {
                         ],
                       ),
                     ),
+
+                    Expanded(
+                      child: Container(),
+                    ),
                     
                     OutlineButton(
                       onPressed: null,
@@ -96,6 +112,37 @@ class _PostViewPageState extends State<PostViewPage> {
                           Icon(Icons.share ,size: 13,color: Colors.black),                          
                         ],
                       ),
+                    ),
+
+                    SizedBox(width: 10),
+                    
+
+
+                    PopupMenuButton<String>(
+                      icon: Icon(Icons.more_horiz),
+                      onSelected: postPopupMenuAction,
+                      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        PopupMenuItem(
+                          value: "report",
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.block,size: 18),
+                              SizedBox(width: 6),
+                              Text('Report'),
+                            ],
+                          )
+                        ),
+                        PopupMenuItem(
+                          value: "savepost",
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.bookmark,size: 16),
+                              SizedBox(width: 4),
+                              Text('Save Post'),
+                            ],
+                          )
+                        ),
+                      ],
                     )
                   ],
                 ),
