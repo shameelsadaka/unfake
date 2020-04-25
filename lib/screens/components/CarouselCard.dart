@@ -4,7 +4,7 @@ import '../templates/CardTemplate.dart';
 class CarouselCard extends StatelessWidget {
   final CardTemplate cardTemplate;
 
-  CarouselCard({Key key, this.cardTemplate}) : super(key: key);
+  CarouselCard({Key key, this.cardTemplate}) : super(key: key);  
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,9 @@ class CarouselCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: GestureDetector(
-            onTap: () => print("Container pressed"),
+            onTap: (){
+              Navigator.of(context).pushNamed('/post');
+            },
             child: Column(
               children: <Widget>[
                 /**
