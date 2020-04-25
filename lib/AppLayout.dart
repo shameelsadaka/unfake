@@ -44,8 +44,8 @@ class AppLayout extends StatelessWidget {
 
                     onPressed: (){
                       final _auth  = FireBaseUser();
-                      _auth.loginStatus().then((value) {
-                        if(value == true) {
+                      _auth.loginStatus().then((isLoggedIn) {
+                        if(isLoggedIn == true) {
                           Navigator.pushNamed(context, '/profile');
                         }
                         else{

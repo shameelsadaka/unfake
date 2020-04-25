@@ -7,7 +7,8 @@ import 'AppLayout.dart';
 import 'screens/HomePage.dart';
 import 'screens/LoginPage.dart';
 import 'screens/PostViewPage.dart';
-import 'screens/setupProfilePage.dart';
+import 'screens/SetupProfilePage.dart';
+import 'screens/ProfilePage.dart';
 
 
 void main() {
@@ -27,7 +28,8 @@ class ItsTrueApp extends StatelessWidget {
         '/home':(context)=>AppLayout(body:HomePage()),
         '/login':(context)=>AppLayout(body:LoginPage()),
         '/post':(context)=>AppLayout(body:PostViewPage()),
-        '/profile':(context)=>AppLayout(body:SetupProfilePage()),
+        '/setup_profile':(context)=>AppLayout(body:SetupProfilePage()),
+        '/profile':(context)=>AppLayout(body:ProfilePage()),
       }
     );
   }

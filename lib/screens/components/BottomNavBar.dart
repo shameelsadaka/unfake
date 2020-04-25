@@ -25,7 +25,7 @@ class BottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: bottomIcons.map((item){
-          return item == null?new SizedBox(width: 20):BottomNavBarItemUI(icon:item.icon,isActive: ModalRoute.of(context).settings.name == item.routeName);
+          return item == null?new SizedBox(width: 20):BottomNavBarItemUI(icon:item.icon,route:item.routeName,isActive: ModalRoute.of(context).settings.name == item.routeName);
         }).toList(),
       ),
     );
@@ -46,18 +46,24 @@ class BottomNavItem{
 class BottomNavBarItemUI extends StatelessWidget {
 
   bool isActive;
+  String route;
   IconData icon;
   
   BottomNavBarItemUI({
     Key key,
     this.isActive =false,
-    this.icon
+    this.icon,  
+    this.route,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: null,
+      onPressed: (){
+        if(!isActive){
+          Navigator.of(context).pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false); 
+        }
+      },
       padding: EdgeInsets.symmetric(horizontal: 0,vertical:20.0), 
       icon: Icon(
         icon,

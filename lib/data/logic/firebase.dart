@@ -5,7 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 class FireBaseUser {
   String verificationId;
   final databaseReference = FirebaseDatabase.instance.reference();
-  Future loginStatus() async {
+  Future<bool> loginStatus() async {
     var isLoggedin = await FirebaseAuth.instance.currentUser();
     if (isLoggedin != null) {
       return true;
@@ -67,16 +67,12 @@ class FireBaseUser {
   }
 
   signIn(verificationCode) async {
-//      Navigator.of(context).pushReplacementNamed('/homepe');
-//    }).catchError((e) {
-//      print(e);
-//    });
     final AuthCredential credential = PhoneAuthProvider.getCredential(
       verificationId: verificationId,
       smsCode: verificationCode,
     );
-    final FirebaseUser user =
-        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+    
+    final FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
     final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
     assert(user.uid == currentUser.uid);
   }
