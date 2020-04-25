@@ -6,6 +6,33 @@ class CarouselCard extends StatelessWidget {
 
   CarouselCard({Key key, this.cardTemplate}) : super(key: key);  
 
+
+
+    void postAction(String action) {
+    print(action);
+
+    switch(action){
+      case "share":
+        break;
+      case "report":
+        break;
+      case "save":
+        break;
+      
+    }
+    ///
+    ///   To be expanded
+    /// 
+    ///   TODO
+    ///   * Extract this function to the controller
+    /// 
+    ///   There is a copy of this function in post view
+    ///
+    
+  }
+  
+  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,7 +94,35 @@ class CarouselCard extends StatelessWidget {
                         ),
                       ),
 
-                      Icon(Icons.more_horiz)
+                      PopupMenuButton<String>(
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                          child:Icon(Icons.more_horiz)  
+                        ),
+                        onSelected: postAction,
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          PopupMenuItem(
+                            value: "report",
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.block,size: 18),
+                                SizedBox(width: 6),
+                                Text('Report'),
+                              ],
+                            )
+                          ),
+                          PopupMenuItem(
+                            value: "savepost",
+                            child: Row(
+                              children: <Widget>[
+                                Icon(Icons.bookmark,size: 16),
+                                SizedBox(width: 4),
+                                Text('Save Post'),
+                              ],
+                            )
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

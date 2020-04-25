@@ -33,9 +33,22 @@ class _PostViewPageState extends State<PostViewPage> {
   void postAction(String action) {
     print(action);
 
+    switch(action){
+      case "share":
+        break;
+      case "report":
+        break;
+      case "save":
+        break;
+      
+    }
     ///
     ///   To be expanded
+    /// 
     ///   TODO
+    ///   * Extract this function to the controller
+    /// 
+    ///   There is a copy of this function in carousel card
     ///
     
   }
@@ -103,7 +116,9 @@ class _PostViewPageState extends State<PostViewPage> {
                     ),
                     
                     OutlineButton(
-                      onPressed: null,
+                      onPressed: (){
+                        postAction("share");
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
