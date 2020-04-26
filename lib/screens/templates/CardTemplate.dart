@@ -3,7 +3,7 @@ class CardTemplate {
  
   String _bgImageName;
  
-  Color titleColor,messageBoxColor,messageColor,subtextColor,miniTitleColor,footerTextColor;
+  Color blockColor,titleColor,messageBoxColor,messageColor,subtextColor,miniTitleColor,footerTextColor;
 
 
 
@@ -30,6 +30,7 @@ class CardTemplate {
 
   CardTemplate.redCard(){
     this._bgImageName = 'red.png';    
+    this.blockColor = Color(0xFFFe67d7c);
     this.titleColor = Color(0xFFC40C0C);
     this.messageBoxColor = Color(0x10FF0027);
     this.messageColor = Color(0xFFAE3031);
@@ -39,6 +40,7 @@ class CardTemplate {
   }  
   CardTemplate.blueCard(){
     this._bgImageName = 'blue.png';    
+    this.blockColor = Color(0xFF8f7cf0);
     this.titleColor = Color(0xFF480ead);
     this.messageBoxColor = Color(0x10480ead);
     this.messageColor = Color(0xFF240063);
@@ -48,6 +50,7 @@ class CardTemplate {
   }
   CardTemplate.greenCard(){
     this._bgImageName = 'green.png';    
+    this.blockColor = Color(0xFF74cd88);
     this.titleColor = Color(0xFF045c2d);
     this.messageBoxColor = Color(0x100b7a29);
     this.messageColor = Color(0xFF006132);
@@ -57,6 +60,7 @@ class CardTemplate {
   }  
   CardTemplate.yellowCard(){
     this._bgImageName = 'yellow.png';    
+    this.blockColor = Color(0xFFeec78c);
     this.titleColor = Color(0xFFad6800);
     this.messageBoxColor = Color(0x10ad6800);
     this.messageColor = Color(0xFF6e4302);
@@ -66,6 +70,7 @@ class CardTemplate {
   }
   CardTemplate.cyanCard(){
     this._bgImageName = 'cyan.png';    
+    this.blockColor = Color(0xFF52c2c6);
     this.titleColor = Color(0xFF127ba1);
     this.messageBoxColor = Color(0x10127ba1);
     this.messageColor = Color(0xFF1e5878);
