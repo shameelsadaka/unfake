@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 //Here Happens all the Firebase Integrations...
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 
 class FireBaseUser {
   String verificationId;
@@ -109,4 +108,15 @@ class FireBaseUser {
     }
 
   }
+  Future getCard(){
+    try {
+      databaseReference.child('posts').orderByChild('requesterId').equalTo(this.userId);
+
+
+    }
+    catch(e){
+      print(e.details);
+    }
+    }
+
 }
