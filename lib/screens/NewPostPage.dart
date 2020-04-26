@@ -18,15 +18,28 @@ class _NewPostPageState extends State<NewPostPage> {
       new CardTemplate.yellowCard(),
       new CardTemplate.cyanCard(),
   ];
-  
-  CardTemplate _cardTemplate;
+  final String _iconsDirectory = 'assets/images/icons/';
+  final List<String> _cardIcons = [
+    'blood_icon_red.png',
+    'soup_icon.png'
+  ];
 
+
+  ///
+  /// Post Variables
+  ///
+
+  CardTemplate _cardTemplate;
+  String _selectedIcon;
+  
+  
 
   final _formKey = GlobalKey<FormState>();
 
   @override void initState() {
     super.initState();
     _cardTemplate = _cardTemplates[0];
+    _selectedIcon = null;
   }
 
   void _createNewPost(){
@@ -109,16 +122,23 @@ class _NewPostPageState extends State<NewPostPage> {
                         ),
                         SizedBox(width: 10.0),
                         FlatButton(
-                          onPressed: (){
-                            // Display Icons
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              Icon(Icons.add,size: 25,color: Colors.black54),
-                              SizedBox(height: 2),
-                              Text("Add Icon",style: TextStyle(color: Colors.black54,fontSize: 12))
-                            ],
-                          ),
+                          padding: EdgeInsets.symmetric(vertical: 7),
+                          onPressed: _showAllIcons,
+                          child:
+                            _selectedIcon == null ?
+                            Column(
+                              children: <Widget>[
+                                Icon(Icons.add,size: 25,color: Colors.black54),
+                                SizedBox(height: 2),
+                                Text("Add Icon ",style: TextStyle(color: Colors.black54,fontSize: 12)),
+                                Text("(Optional)",style: TextStyle(color: Colors.black54,fontSize: 9))
+                              ],
+                            )
+                            :
+                            Image.asset(
+                              (_iconsDirectory + _selectedIcon),
+                              width: 50.0,
+                            )
                         )
                       ],
                     ),
@@ -337,4 +357,49 @@ class _NewPostPageState extends State<NewPostPage> {
       ),
     );
   }
+  Future<void> _showAllIcons() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: GridView.count(
+            primary: false,
+            padding: const EdgeInsets.all(10),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 5,
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            children: List.from(
+              [
+              FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedIcon = null;
+                    }); 
+                    Navigator.pop(context);
+                  },
+                  child:Text('No Image',textAlign: TextAlign.center),
+                )
+              ]            
+            )..addAll(
+              _cardIcons.map((img)=>
+                FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedIcon = img;
+                    }); 
+                    Navigator.pop(context);
+                  },
+                  child:Image.asset((_iconsDirectory + img),height: 50.0),
+                )
+              ).toList()
+            )
+
+          )
+        );
+      }
+    );
+
+  }
+
 }
