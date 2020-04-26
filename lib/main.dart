@@ -9,6 +9,7 @@ import 'screens/LoginPage.dart';
 import 'screens/PostViewPage.dart';
 import 'screens/SetupProfilePage.dart';
 import 'screens/ProfilePage.dart';
+import 'screens/NewPostPage.dart';
 
 
 void main() {
@@ -23,13 +24,14 @@ class ItsTrueApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: getThemeData(), // Theme Data is Set in theme.dart
-      initialRoute: '/post',
+      initialRoute: '/new_post',
       routes: {
         '/home':(context)=>AppLayout(body:HomePage()),
         '/login':(context)=>AppLayout(body:LoginPage()),
         '/post':(context)=>AppLayout(body:PostViewPage()),
         '/setup_profile':(context)=>AppLayout(body:SetupProfilePage()),
         '/profile':(context)=>AppLayout(body:ProfilePage()),
+        '/new_post':(context)=>AppLayout(body:NewPostPage(),newPostButton: false),
       }
     );
   }

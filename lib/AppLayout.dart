@@ -10,10 +10,10 @@ import 'screens/LoginPage.dart';
 class AppLayout extends StatelessWidget {
   
   final Widget body;
-  
+  final bool newPostButton;
   Widget get getCurrentPage => body;
   
-  const AppLayout({this.body});
+  const AppLayout({this.body,this.newPostButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +70,15 @@ class AppLayout extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
+      floatingActionButton:FloatingActionButton(
+        onPressed: (){
+          Navigator.of(context).pushNamed('/new_post');
+        },
         tooltip: 'Create New Post',
         child: Icon(Icons.add, size: 30.0),
         backgroundColor: Theme.of(context).primaryColor,
-      ),
+      )
+      ,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
