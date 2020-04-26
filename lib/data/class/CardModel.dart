@@ -26,6 +26,7 @@ class CardDatas {
       this.contacts});
 
   factory CardDatas.fromJson(Map<String, dynamic> json) {
+
     var list = json['message'] as List;
     print(list.runtimeType);
     List<Message> messageList = list.map((i) => Message.fromJson(i)).toList();
