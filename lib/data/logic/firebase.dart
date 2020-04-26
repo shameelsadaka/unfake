@@ -1,17 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 //Here Happens all the Firebase Integrations...
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 
 class FireBaseUser {
   String verificationId;
   final databaseReference = FirebaseDatabase.instance.reference();
-  Future<bool> loginStatus() async {
-    var isLoggedin = await FirebaseAuth.instance.currentUser();
-    if (isLoggedin != null) {
-      return true;
-    } else {
-      return false;
-    }
+
+  //User Data
+  String userId;
+  String userName = "User";
+  String userTitle = "None";
+  // Firebase Phone Auth
+  Future loginStatus() async {
+    return await FirebaseAuth.instance.currentUser();
+
   }
 
   Future<void> signOut() async {
@@ -20,23 +23,9 @@ class FireBaseUser {
 
   Future<String> userUid() async {
     var uid = await FirebaseAuth.instance.currentUser();
+    this.userId = uid.uid;
     return uid.uid;
   }
-
-  Future writeProfile(name, designation) async {
-    try {
-      var auth = userUid().then((value) {
-        databaseReference
-            .child('users')
-            .child(value)
-            .set({'name': name, 'designation': designation});
-      });
-    } catch (e) {
-      print(e.details);
-    }
-  }
-
-  //ToDo Complete Firebase storing Code
 
   Future<bool> verifyPhone(phoneNumber) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
@@ -71,9 +60,53 @@ class FireBaseUser {
       verificationId: verificationId,
       smsCode: verificationCode,
     );
-    
-    final FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+
+    final FirebaseUser user =
+        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
     final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
     assert(user.uid == currentUser.uid);
+  }
+
+  //Data Handling
+  //ToDo Complete Firebase storing Code
+  Future writeProfile(name, designation) async {
+    try {
+      userUid().then((value) {
+        databaseReference
+            .child('users')
+            .child(value)
+            .set({'name': name, 'designation': designation});
+      });
+    } catch (e) {
+      print(e.details);
+    }
+  }
+
+
+  Future cardData(timestamp, title, uid, alphanumeric, isVerified, template,
+      thumbnail, body) async {
+    try {
+      userUid().then((value) {
+        databaseReference.child('posts').child('$uid').set({
+          "uid": uid, // for app purpose
+          "postId": alphanumeric,
+          "title": title,
+          "template": template,
+          "thumbnail": thumbnail,
+          "requesterId": this.userId, // Firebase User ID
+          "requesterName": this.userName,
+          "requesterTitle": this.userTitle,
+          "messages": [
+            {"body": body, "time": timestamp}
+          ],
+          "contacts": ["+91 9876543210", "+91 9956858388"],
+          "isVerified": isVerified,
+          "verifiedCount": 0,
+        });
+      });
+    } catch (e) {
+      print(e.details);
+    }
+
   }
 }
