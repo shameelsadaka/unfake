@@ -1,0 +1,27 @@
+{
+    "uid":123123213213,    
+    "postId":"APZ2123",
+    "title":"കൊച്ചി അമൃതയിലേക്ക് A+ രക്തം ആവശ്യമുണ്ട്",
+    "template":"red",
+    "thumbnail":"blood_icon_red.png",
+    "requesterId":"jkh2hbsajdk",  
+    "requesterName":"Reyn Mathew",
+    "requesterTitle":"Co Ordinator Kerala Blood Donors Group",
+    "messages":[
+        {
+           "body":"കൊച്ചി അമൃത ഹോസപിറ്റലിൽ  ആക്സിഡന്‍റ് ആയി കിടക്കുന്ന യുവാവിന് നാല് കൂപ്പി A+ ബ്ലഡ് ആവശ്യമുണ്ട്‌.",
+           "time":12321312312
+        },
+        {
+           "body":"രക്തം നല്‍കാന്‍ ഒരാള്‍ വന്നിട്ടുണ്ട്. 3 പേരെ കൂടി ആവശ്യമുണ്ട്",
+           "time":12321312312
+        },
+        {
+           "body":"രക്തം നല്‍കാന്‍ തയ്യാറായി 2 പേർ വന്നിട്ടുണ്ട്. 2 പേരെ കൂടി ആവശ്യമുണ്ട്",
+           "time":12321312312
+        }
+    ],
+    "contacts":["+91 9876543210","+91 9956858388"],
+    "isVerified":true,
+    "verifiedCount" : 0 
+}

@@ -11,6 +11,10 @@ class CardDatas {
   final int verifiedCount;
   final List<Message> message;
   final List<String> contacts;
+  
+  CardTemplate get cardTemplate{
+    return CardTemplate.fromColor(template);
+  }
 
   CardDatas(
       {this.postId,
@@ -44,6 +48,7 @@ class CardDatas {
       message: messageList
     );
   }
+  
 }
 
 class Message {
