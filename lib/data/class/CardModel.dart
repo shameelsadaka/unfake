@@ -1,4 +1,5 @@
 import 'package:itstrue/screens/templates/CardTemplate.dart';
+
 class CardModel {
   final String postId;
   final String title;
@@ -11,12 +12,12 @@ class CardModel {
   final int verifiedCount;
   final List<Message> message;
   final List<String> contacts;
-  
-  CardTemplate get cardTemplate{
+
+  CardTemplate get cardTemplate {
     return CardTemplate.fromColor(template);
   }
 
-  CardModel(
+  CardModel({
       this.postId,
       this.title,
       this.template,
@@ -27,39 +28,40 @@ class CardModel {
       this.isVerified,
       this.verifiedCount,
       this.message,
-      this.contacts);
+      this.contacts});
 
-//  factory CardModel.fromJson(Map<String, dynamic> json) {
-//
-//    var list = json['message'] as List;
-//    print(list.runtimeType);
-//    List<Message> messageList = list.map((i) => Message.fromJson(i)).toList();
-//    return CardModel(
-//      postId: json['postId'],
-//      title: json['title'],
-//      template: json['template'],
-//      thumbnail: json['thumbnail'],
-//      requesterId: json['requesterId'],
-//      requesterName: json['requesterName'],
-//      requesterTitle: json['requesterTitle'],
-//      isVerified: json['isVerified'],
-//      verifiedCount: json['verifiedCount'],
-//      contacts: json['contacts'],
-//      message: messageList
-//    );
-//  }
-  
+  factory CardModel.fromJson(var json) {
+    Map<String, dynamic> parsedJson = Map<String, dynamic>.from(json);
+    return CardModel(
+        postId: parsedJson['postId'],
+        title: parsedJson['title'],
+        template: parsedJson['template'],
+        thumbnail: parsedJson['thumbnail'],
+        requesterId: parsedJson['requesterId'],
+        requesterName: parsedJson['requesterName'],
+        requesterTitle: parsedJson['requesterTitle'],
+        isVerified: parsedJson['isVerified'],
+        verifiedCount: parsedJson['verifiedCount'],
+        contacts: new List<String>.from(parsedJson['contacts']),
+        message: parseMessages(json['messages'])
+    );
+  }
+
+  static List<Message> parseMessages(messagesJson){
+    var list  = messagesJson as List;
+    List<Message> messageList = list.map((data)=>Message.fromJson(data)).toList();
+    return messageList;
+  }
 }
 
 class Message {
   final String body;
-  final String time;
+  final int time;
 
-  Message(this.body, this.time);
-//  factory Message.fromJson(Map<String, dynamic> parsedJson){
-//    return Message(
-//        body:parsedJson['body'],
-//        time:parsedJson['time']
-//    );
-//  }
+  Message({this.body, this.time});
+
+  factory Message.fromJson(var json) {
+    Map<String, dynamic> parsedJson = Map<String, dynamic>.from(json);
+    return Message(body: parsedJson['body'], time: parsedJson['time']);
+  }
 }
