@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../templates/CardTemplate.dart';
+import 'package:itstrue/screens/templates/cardTemplate.dart';
+import 'package:itstrue/data/class/CardModel.dart';
 
 class CarouselCard extends StatelessWidget {
-  final CardTemplate cardTemplate;
+  final CardModel cardData;
 
-  CarouselCard({Key key, this.cardTemplate}) : super(key: key);  
+  CarouselCard({Key key, this.cardData}) : super(key: key);  
 
 
 
@@ -45,7 +46,7 @@ class CarouselCard extends StatelessWidget {
                 )
               ],
               image: DecorationImage(
-                image: AssetImage(cardTemplate.bgImage),
+                image: AssetImage(cardData.cardTemplate.bgImage),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -79,7 +80,7 @@ class CarouselCard extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Text(
-                              "APZ2123",
+                              cardData.postId,
                               style: TextStyle(
                                   fontSize: 12.0,
                                   color: Colors.brown,
@@ -140,11 +141,11 @@ class CarouselCard extends StatelessWidget {
                       // Card Title
                       Expanded(
                         child: Text(
-                          "കൊച്ചി അമൃതയിലേക്ക് A+ രക്തം ആവശ്യമുണ്ട്",
+                          cardData.title,
                           style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.w700,
-                              color: cardTemplate.titleColor),
+                              color: cardData.cardTemplate.titleColor),
                         ),
                       ),
                       SizedBox(width: 10.0),
@@ -176,7 +177,7 @@ class CarouselCard extends StatelessWidget {
                                   "കൊച്ചി അമൃത ഹോസപിറ്റലിൽ  ആക്സിഡന്‍റ് ആയി കിടക്കുന്ന യുവാവിന് നാല് കൂപ്പി A+ ബ്ലഡ് ആവശ്യമുണ്ട്‌. ",
                               date: "12 MARCH 2020",
                               time: "09:53 PM",
-                              cardTemplate: cardTemplate,
+                              cardData: cardData,
                             ),
                             Container(
                               margin: EdgeInsets.only(
@@ -187,13 +188,13 @@ class CarouselCard extends StatelessWidget {
                                   Text("LATEST UPDATE",
                                       style: TextStyle(
                                           fontSize: 10.0,
-                                          color: cardTemplate.subtextColor,
+                                          color: cardData.cardTemplate.subtextColor,
                                           fontWeight: FontWeight.bold)),
                                   SizedBox(width: 5),
                                   Text("( 2 TOTAL UPDATES)",
                                       style: TextStyle(
                                           fontSize: 9.0,
-                                          color: cardTemplate.subtextColor))
+                                          color: cardData.cardTemplate.subtextColor))
                                 ],
                               ),
                             ),
@@ -208,7 +209,7 @@ class CarouselCard extends StatelessWidget {
                                   "രക്തം നല്‍കാന്‍ തയ്യാറായി 2 പേർ വന്നിട്ടുണ്ട്. 2 പേരെ കൂടി ആവശ്യമുണ്ട്",
                               date: "13 MARCH 2020",
                               time: "12:17 PM",
-                              cardTemplate: cardTemplate,
+                              cardData: cardData,
                             ),
                           ],
                         ))),
@@ -232,17 +233,17 @@ class CarouselCard extends StatelessWidget {
                           children: <Widget>[
                             Text("REQUESTER",
                                 style: TextStyle(
-                                    color: cardTemplate.miniTitleColor,
+                                    color: cardData.cardTemplate.miniTitleColor,
                                     fontSize: 10.0,
                                     fontWeight: FontWeight.w500)),
                             Text("Reyn Mathew",
                                 style: TextStyle(
-                                    color: cardTemplate.subtextColor,
+                                    color: cardData.cardTemplate.subtextColor,
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.w500)),
                             Text("Co Ordinator Kerala Blood Donors Group",
                                 style: TextStyle(
-                                    color: cardTemplate.subtextColor,
+                                    color: cardData.cardTemplate.subtextColor,
                                     fontSize: 9,
                                     fontWeight: FontWeight.w500)),
                           ],
@@ -255,17 +256,17 @@ class CarouselCard extends StatelessWidget {
                           children: <Widget>[
                             Text("CONTACT",
                                 style: TextStyle(
-                                    color: cardTemplate.miniTitleColor,
+                                    color: cardData.cardTemplate.miniTitleColor,
                                     fontSize: 10.0,
                                     fontWeight: FontWeight.w500)),
                             Text("+91 9876543210",
                                 style: TextStyle(
-                                    color: cardTemplate.subtextColor,
+                                    color: cardData.cardTemplate.subtextColor,
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w500)),
                             Text("+91 9956858388",
                                 style: TextStyle(
-                                    color: cardTemplate.subtextColor,
+                                    color: cardData.cardTemplate.subtextColor,
                                     fontSize: 11.5,
                                     fontWeight: FontWeight.w500)),
                           ],
@@ -291,14 +292,14 @@ class CarouselCard extends StatelessWidget {
                         children: <Widget>[
                           Icon(
                             Icons.verified_user,
-                            color: cardTemplate.footerTextColor,
+                            color: cardData.cardTemplate.footerTextColor,
                             size: 12.0,
                           ),
                           SizedBox(width: 1),
                           Text(
                             "VERIFIED BY UNFAKE VOLUNTEER",
                             style: TextStyle(
-                              color: cardTemplate.footerTextColor,
+                              color: cardData.cardTemplate.footerTextColor,
                               fontSize: 9,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1,
@@ -316,10 +317,10 @@ class CardMessageBox extends StatelessWidget {
   final String message;
   final String date;
   final String time;
-  final CardTemplate cardTemplate;
+  final CardModel cardData;
 
   const CardMessageBox(
-      {Key key, this.message, this.date, this.time, this.cardTemplate})
+      {Key key, this.message, this.date, this.time, this.cardData})
       : super(key: key);
 
   @override
@@ -334,14 +335,14 @@ class CardMessageBox extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 5.0),
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             decoration: BoxDecoration(
-                color: cardTemplate.messageBoxColor,
+                color: cardData.cardTemplate.messageBoxColor,
                 borderRadius: BorderRadius.circular(8.0)),
             child: Text(
               this.message,
               style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.normal,
-                  color: cardTemplate.messageColor),
+                  color: cardData.cardTemplate.messageColor),
             ),
           ),
 
