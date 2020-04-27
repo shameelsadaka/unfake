@@ -39,7 +39,7 @@ class _PostViewPageState extends State<PostViewPage> {
 
     switch(action){
       case "share":
-        _capturePng();
+        _shareCardImage();
         break;
       case "report":
         break;
@@ -60,12 +60,12 @@ class _PostViewPageState extends State<PostViewPage> {
   
   GlobalKey _globalKey = new GlobalKey();
 
-  Future<void> _capturePng() async {
+  Future<void> _shareCardImage() async {
     try {
       RenderRepaintBoundary boundary = _globalKey.currentContext.findRenderObject();
 
       if (boundary.debugNeedsPaint) {
-        Timer(Duration(seconds: 1), () => _capturePng());
+        Timer(Duration(seconds: 1), () => _shareCardImage());
         return null;
       }
 
