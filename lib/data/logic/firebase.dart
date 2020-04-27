@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 //Here Happens all the Firebase Integrations...
 import 'package:firebase_database/firebase_database.dart';
+import 'package:itstrue/data/class/CardModel.dart';
 
+import '../../screens/components/HomeCarousel.dart';
+import '../class/CardModel.dart';
+import '../class/CardModel.dart';
+import '../class/CardModel.dart';
 class FireBaseUser {
   String verificationId;
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -86,8 +91,7 @@ class FireBaseUser {
       thumbnail, body) async {
     try {
       userUid().then((value) {
-        databaseReference.child('posts').child('$uid').set({
-          "uid": uid, // for app purpose
+        databaseReference.child('posts').push().set({
           "postId": alphanumeric,
           "title": title,
           "template": template,
@@ -108,15 +112,60 @@ class FireBaseUser {
     }
 
   }
-  Future getCard(){
-    try {
-      databaseReference.child('posts').orderByChild('requesterId').equalTo(this.userId);
+Future updateCard(postId,body){
+userUid().then((value){
+  databaseReference.child('posts').orderByChild('postId').equalTo(postId).once().then((DataSnapshot snap){
+    var data = snap.value;
+    var keys = snap.value.keys;
 
+    if(data ==null){
+      return null;
+    }
+    else{
+      for(var key in keys)
+      {
+        int timeStamp = new DateTime.now().millisecondsSinceEpoch;
+databaseReference.child('posts').child(key).child('messages').push().set({
+  "body":body,
+  "time":timeStamp
+});
 
+      }
     }
-    catch(e){
-      print(e.details);
-    }
-    }
+
+  });
+});
 
 }
+
+ static getCardData(){
+  List<CardModel> cardDataList= [];
+  FirebaseDatabase.instance.reference()
+      .child('posts').once().then((DataSnapshot snap) {
+      var data = snap.value;
+      var keys = snap.value.keys;
+      for (var key in keys){
+        print(data[key]);
+        CardModel carddata = new CardModel
+          (
+          data[key]['postId'],
+          data[key]['title'],
+          data[key]['template'],
+          data[key]['thumbnail'],
+          data[key]['requesterId'],
+          data[key]['requesterName'],
+          data[key]['requesterTitle'],
+          data[key]['isVerified'],
+          data[key]['verifiedCount'],
+          data[key]['message'],
+          data[key]['contacts'].cast<String>(),
+
+        );
+cardDataList.add(carddata);
+      }
+    });
+    return cardDataList;
+    }
+}
+
+
