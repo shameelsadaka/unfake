@@ -2,11 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 //Here Happens all the Firebase Integrations...
 import 'package:firebase_database/firebase_database.dart';
 import 'package:itstrue/data/class/CardModel.dart';
+import '../class/CardModel.dart';
 
-import '../../screens/components/HomeCarousel.dart';
-import '../class/CardModel.dart';
-import '../class/CardModel.dart';
-import '../class/CardModel.dart';
 class FireBaseUser {
   String verificationId;
   final databaseReference = FirebaseDatabase.instance.reference();
