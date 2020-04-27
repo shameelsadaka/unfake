@@ -33,6 +33,47 @@ class _PostViewPageState extends State<PostViewPage> {
     });
   }
   
+  void _newUpdate() async{
+    String newUpdateText;
+    await showDialog<String>(
+      context: context,
+      barrierDismissible: false, // dialog is dismissible with a tap on the barrier
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Update the Post'),
+          content: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new TextField(
+                maxLines: null,
+                autofocus: true,
+                decoration: new InputDecoration(
+                    labelText: 'Enter Update Message',
+                  ),
+                onChanged: (value) {
+                  newUpdateText = value;
+                },
+              ))
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('CANCEL'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text('UPDATE'),
+              onPressed: () {
+                Navigator.of(context).pop(newUpdateText);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override void initState() {
     _viewUpdates = false;
@@ -285,38 +326,61 @@ class _PostViewPageState extends State<PostViewPage> {
                             /**
                            * Update History
                            * --------------------
-                           */
-                            (
-                              _viewUpdates == true?
-                              CardMessageBox(
-                                message:"രക്തം നല്‍കാന്‍ ഒരാള്‍ വന്നിട്ടുണ്ട്. 3 പേരെ കൂടി ആവശ്യമുണ്ട്",
-                                date: "13 MARCH 2020",
-                                time: "10:48 AM",
-                                cardTemplate: cardTemplate,
-                                important: false,
-                              )
-                              :
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical:5),
-                                child: Center(
-                                  child: OutlineButton(
+                           */                            
+                            if(_viewUpdates)
+                              ...[
+                                CardMessageBox(
+                                  message:"രക്തം നല്‍കാന്‍ ഒരാള്‍ വന്നിട്ടുണ്ട്. 3 പേരെ കൂടി ആവശ്യമുണ്ട്",
+                                  date: "13 MARCH 2020",
+                                  time: "10:48 AM",
+                                  cardTemplate: cardTemplate,
+                                  important: false,
+                                )
+                              ]
+                            ,
+
+
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical:5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children:<Widget>[
+                                  OutlineButton(
                                     borderSide: BorderSide(
                                       color: cardTemplate.footerTextColor,
                                     ),
-                                    onPressed: _showUpdateHistory,
+                                    onPressed: _newUpdate,
                                     child:Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        Icon(Icons.access_time,size: 12,color: cardTemplate.footerTextColor),
+                                        Icon(Icons.add_alert,size: 15,color: cardTemplate.footerTextColor),
                                         SizedBox(width: 4),
-                                        Text("VIEW UPDATE HISTORY",style: TextStyle(fontSize: 11,color: cardTemplate.footerTextColor))
+                                        Text("ADD UPDATE",style: TextStyle(fontSize: 11,color: cardTemplate.footerTextColor))
                                       ],
                                     ),
                                   ),
-                                ),
-                              )
-                            )
-
+                                  
+                                  if(_viewUpdates == false)
+                                    ...[
+                                      SizedBox(width: 10),
+                                      OutlineButton(
+                                        borderSide: BorderSide(
+                                          color: cardTemplate.footerTextColor,
+                                        ),
+                                        onPressed: _showUpdateHistory,
+                                        child:Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Icon(Icons.access_time,size: 15,color: cardTemplate.footerTextColor),
+                                            SizedBox(width: 4),
+                                            Text("UPDATE HISTORY",style: TextStyle(fontSize: 11,color: cardTemplate.footerTextColor))
+                                          ],
+                                        ),
+                                      ),
+                                    ]
+                                ],
+                              ),
+                            ),
                                             
                             
                           ],
