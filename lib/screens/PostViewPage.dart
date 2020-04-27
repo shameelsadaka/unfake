@@ -69,7 +69,7 @@ class _PostViewPageState extends State<PostViewPage> {
     RenderRepaintBoundary boundary = _globalKey.currentContext.findRenderObject();
     ui.Image image = await boundary.toImage(pixelRatio: 3.0);
     ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    await Share.file('Unfake', 'unfake.png', byteData.buffer.asUint8List(), 'image/png', text: 'My optional text.');
+    await Share.file('Unfake', 'unfake.png', byteData.buffer.asUint8List(), 'image/png', text: '*APZ2123* - Created Using UnfakeApp');
   }
 
   @override
