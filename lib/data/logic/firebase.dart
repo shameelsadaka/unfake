@@ -176,17 +176,17 @@ class FireBaseUser {
         var keys = snap.value.keys;
         print(data);
 
-        if (data != null) {
+        if (data == null) {
           return false;
         } else {
           for (var key in keys) {
             var count = data[key]['reports'].length;
             //Set Status of Card to False if reported by 3 persons
-            if(count >=2){
+            if (count >= 2) {
               databaseReference
                   .child('posts')
                   .child(key)
-                  .set({"status" : false});
+                  .set({"status": false});
             }
             //Adding reported user info to report tag
             databaseReference
@@ -215,7 +215,43 @@ class FireBaseUser {
     });
   }
 
-  static getCardData() {
+  searchCard(postId) {
+    List<CardModel> searchedCardData = [];
+    FirebaseDatabase.instance
+        .reference()
+        .orderByChild('postId')
+        .equalTo(postId)
+        .once()
+        .then((DataSnapshot snap) {
+      var data = snap.value;
+      var keys = snap.value.keys;
+      if (data != null) {
+        for (var key in keys) {
+          print(data[key]);
+          CardModel searchedCard = new CardModel(
+            data[key]['postId'],
+            data[key]['title'],
+            data[key]['template'],
+            data[key]['thumbnail'],
+            data[key]['requesterId'],
+            data[key]['requesterName'],
+            data[key]['requesterTitle'],
+            data[key]['isVerified'],
+            data[key]['verifiedCount'],
+            data[key]['message'],
+            data[key]['contacts'].cast<int>(),
+          );
+          searchedCardData.add(searchedCard);
+          return searchedCardData;
+        }
+      } else {
+        return null;
+      }
+      return null;
+    });
+  }
+
+  getCardData() {
     List<CardModel> cardDataList = [];
     FirebaseDatabase.instance
         .reference()

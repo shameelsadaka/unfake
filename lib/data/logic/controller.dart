@@ -16,7 +16,7 @@ class DataHandler{
   signOut(){
     _auth.signOut();
   }
-  createCard() {
+  createCard(title,body,template,isVerified,thumbnail) {
     String title = "കൊച്ചി അമൃത ഹോസപിറ്റലിൽ  ആക്സിഡന്‍റ് ആയി കിടക്കുന്ന യുവാവിന് നാല് കൂപ്പി A+ ബ്ലഡ് ആവശ്യമുണ്ട്‌.";
     String body = "രക്തം നല്‍കാന്‍ തയ്യാറായി 2 പേർ വന്നിട്ടുണ്ട്. 2 പേരെ കൂടി ആവശ്യമുണ്ട്";
     //General Defaults
@@ -34,7 +34,7 @@ class DataHandler{
 
     //Generate Post ID
 String alpha = randomAlpha(3).toUpperCase();
-String num = randomBetween(1,1000).toString();
+String num = randomBetween(1,9999).toString();
 String alphanumeric = alpha + num ;
 
     //Passing datas to Firebase Function Class

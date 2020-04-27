@@ -34,7 +34,12 @@ final designation = TextEditingController();
                       
                       RaisedButton.icon(
                         onPressed: () {
-                          data.createCard();
+                          String title = "കൊച്ചി അമൃത ഹോസപിറ്റലിൽ  ആക്സിഡന്‍റ് ആയി കിടക്കുന്ന യുവാവിന് നാല് കൂപ്പി A+ ബ്ലഡ് ആവശ്യമുണ്ട്‌.";
+                          String body = "രക്തം നല്‍കാന്‍ തയ്യാറായി 2 പേർ വന്നിട്ടുണ്ട്. 2 പേരെ കൂടി ആവശ്യമുണ്ട്";
+                          String template = 'red';
+                          bool isVerified = false;
+                          String thumbnail = 'blood_icon_red.png';
+                          data.createCard(title,body,template,isVerified,thumbnail);
                           print("Clicked on Add Post");
                         },
                         color: Theme.of(context).primaryColor,
