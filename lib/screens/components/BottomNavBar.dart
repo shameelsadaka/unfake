@@ -45,11 +45,11 @@ class BottomNavItem{
 
 class BottomNavBarItemUI extends StatelessWidget {
 
-  bool isActive;
-  String route;
-  IconData icon;
+  final bool isActive;
+  final String route;
+  final IconData icon;
   
-  BottomNavBarItemUI({
+  const BottomNavBarItemUI({
     Key key,
     this.isActive =false,
     this.icon,  
