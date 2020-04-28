@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:itstrue/screens/templates/CardTemplate.dart';
 
 class CardModel {
@@ -9,8 +10,9 @@ class CardModel {
   final String requesterName;
   final String requesterTitle;
   final bool isVerified;
+  final String verification;
   final int verifiedCount;
-  final List<Message> message;
+  final List<CardMessage> messages;
   final List<String> contacts;
 
   CardTemplate get cardTemplate {
@@ -26,8 +28,9 @@ class CardModel {
       this.requesterName,
       this.requesterTitle,
       this.isVerified,
+      this.verification,
       this.verifiedCount,
-      this.message,
+      this.messages,
       this.contacts});
 
   factory CardModel.fromJson(var json) {
@@ -41,27 +44,41 @@ class CardModel {
         requesterName: parsedJson['requesterName'],
         requesterTitle: parsedJson['requesterTitle'],
         isVerified: parsedJson['isVerified'],
+        verification: parsedJson['verification'],
         verifiedCount: parsedJson['verifiedCount'],
         contacts: new List<String>.from(parsedJson['contacts']),
-        message: parseMessages(json['messages'])
+        messages: parseMessages(json['messages'])
     );
   }
 
-  static List<Message> parseMessages(messagesJson){
+  static List<CardMessage> parseMessages(messagesJson){
     var list  = messagesJson as List;
-    List<Message> messageList = list.map((data)=>Message.fromJson(data)).toList();
+    List<CardMessage> messageList = list.map((data)=>CardMessage.fromJson(data)).toList();
     return messageList;
+  }
+  
+  String get thumbAddress{
+    return 'assets/images/icons/'+this.thumbnail;
   }
 }
 
-class Message {
+class CardMessage {
   final String body;
-  final int time;
+  final int timestamp;
+  DateTime dateTime;
+  String get date{
+    return DateFormat("dd MMMM yyyy").format(dateTime).toUpperCase();
+  }   
+  String get time{
+    return DateFormat("hh:mm a").format(dateTime);
+  }   
 
-  Message({this.body, this.time});
+  CardMessage({this.body, this.timestamp}){
+    this.dateTime = DateTime.fromMillisecondsSinceEpoch(this.timestamp);
+  }
 
-  factory Message.fromJson(var json) {
+  factory CardMessage.fromJson(var json) {
     Map<String, dynamic> parsedJson = Map<String, dynamic>.from(json);
-    return Message(body: parsedJson['body'], time: parsedJson['time']);
+    return CardMessage(body: parsedJson['body'], timestamp: parsedJson['time']);
   }
 }
