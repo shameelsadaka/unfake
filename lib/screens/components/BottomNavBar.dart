@@ -12,9 +12,9 @@ class BottomNavBar extends StatelessWidget {
 
   final List<BottomNavItem> bottomIcons = [
     BottomNavItem('/home',Icons.home),
-    BottomNavItem('/myposts',Icons.mode_comment),
-    null,
     BottomNavItem('/saved_posts',Icons.bookmark),
+    null,
+    BottomNavItem('/myposts',Icons.mode_comment),
     BottomNavItem('/settings',Icons.settings),
   ];
 
