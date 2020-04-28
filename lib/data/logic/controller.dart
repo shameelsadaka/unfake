@@ -5,13 +5,16 @@ import 'package:itstrue/data/class/CardModel.dart';
 
 class DataHandler {
   final _auth = FireBaseUser();
-
-  loginStatus() {
+  bool loginStatus() {
     if (_auth.loginStatus() != null) {
       return true;
     } else {
       return false;
     }
+  }
+
+  Future<String> getUserUid() async {
+    return _auth.userUid();
   }
 
   signOut() {

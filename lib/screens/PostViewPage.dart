@@ -11,6 +11,10 @@ import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/screens/components/SharableCard.dart';
 import 'package:itstrue/screens/components/CardMessageBox.dart';
 
+import 'package:itstrue/data/logic/controller.dart';
+
+
+
 class PostViewPage extends StatefulWidget {
   final CardModel cardData;
   PostViewPage({this.cardData});
@@ -21,13 +25,21 @@ class PostViewPage extends StatefulWidget {
 
 class _PostViewPageState extends State<PostViewPage> {
   bool _viewUpdates;
-
+  DataHandler _dataHandler = DataHandler();
+  String _loggedInUserId;
   CardModel cardData;
 
   @override
   void initState() {
     _viewUpdates = false;
     cardData = widget.cardData;
+    _dataHandler.getUserUid().then((uid){
+      setState(() {
+      _loggedInUserId = uid;
+      });
+      print(uid);
+      print(cardData.requesterId);
+    });
     super.initState();
   }
 
@@ -53,6 +65,12 @@ class _PostViewPageState extends State<PostViewPage> {
                 maxLines: null,
                 autofocus: true,
                 decoration: new InputDecoration(
+                  labelStyle: TextStyle(color: cardData.cardTemplate.titleColor),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: cardData.cardTemplate.titleColor
+                    )
+                  ),
                   labelText: 'Enter Update Message',
                 ),
                 onChanged: (value) {
@@ -357,28 +375,40 @@ class _PostViewPageState extends State<PostViewPage> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        OutlineButton(
-                                          borderSide: BorderSide(
-                                            color: cardData
-                                                .cardTemplate.footerTextColor,
+
+                                        ///
+                                        /// Add Update Button
+                                        ///
+
+                                        if(_loggedInUserId == cardData.requesterId ) 
+                                          OutlineButton(
+                                            borderSide: BorderSide(
+                                              color: cardData
+                                                  .cardTemplate.footerTextColor,
+                                            ),
+                                            onPressed: _newUpdate,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Icon(Icons.add_alert,
+                                                    size: 15,
+                                                    color: cardData.cardTemplate
+                                                        .footerTextColor),
+                                                SizedBox(width: 4),
+                                                Text("ADD UPDATE",
+                                                    style: TextStyle(
+                                                        fontSize: 11,
+                                                        color: cardData.cardTemplate
+                                                            .footerTextColor))
+                                              ],
+                                            ),
                                           ),
-                                          onPressed: _newUpdate,
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Icon(Icons.add_alert,
-                                                  size: 15,
-                                                  color: cardData.cardTemplate
-                                                      .footerTextColor),
-                                              SizedBox(width: 4),
-                                              Text("ADD UPDATE",
-                                                  style: TextStyle(
-                                                      fontSize: 11,
-                                                      color: cardData.cardTemplate
-                                                          .footerTextColor))
-                                            ],
-                                          ),
-                                        ),
+
+
+                                        ///
+                                        /// Update History Button
+                                        ///
+
                                         if (_viewUpdates == false &&
                                             cardData.messages.length > 2) ...[
                                           SizedBox(width: 10),
