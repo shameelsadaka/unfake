@@ -1,4 +1,6 @@
+import 'package:intl/intl.dart';
 import 'package:itstrue/screens/templates/CardTemplate.dart';
+
 class CardModel {
   final String postId;
   final String title;
@@ -8,15 +10,16 @@ class CardModel {
   final String requesterName;
   final String requesterTitle;
   final bool isVerified;
+  final String verification;
   final int verifiedCount;
-  final List<Message> message;
+  final List<CardMessage> messages;
   final List<String> contacts;
-  
-  CardTemplate get cardTemplate{
+
+  CardTemplate get cardTemplate {
     return CardTemplate.fromColor(template);
   }
 
-  CardModel(
+  CardModel({
       this.postId,
       this.title,
       this.template,
@@ -25,41 +28,57 @@ class CardModel {
       this.requesterName,
       this.requesterTitle,
       this.isVerified,
+      this.verification,
       this.verifiedCount,
-      this.message,
-      this.contacts);
+      this.messages,
+      this.contacts});
 
-//  factory CardModel.fromJson(Map<String, dynamic> json) {
-//
-//    var list = json['message'] as List;
-//    print(list.runtimeType);
-//    List<Message> messageList = list.map((i) => Message.fromJson(i)).toList();
-//    return CardModel(
-//      postId: json['postId'],
-//      title: json['title'],
-//      template: json['template'],
-//      thumbnail: json['thumbnail'],
-//      requesterId: json['requesterId'],
-//      requesterName: json['requesterName'],
-//      requesterTitle: json['requesterTitle'],
-//      isVerified: json['isVerified'],
-//      verifiedCount: json['verifiedCount'],
-//      contacts: json['contacts'],
-//      message: messageList
-//    );
-//  }
+  factory CardModel.fromJson(var json) {
+    Map<String, dynamic> parsedJson = Map<String, dynamic>.from(json);
+    return CardModel(
+        postId: parsedJson['postId'],
+        title: parsedJson['title'],
+        template: parsedJson['template'],
+        thumbnail: parsedJson['thumbnail'],
+        requesterId: parsedJson['requesterId'],
+        requesterName: parsedJson['requesterName'],
+        requesterTitle: parsedJson['requesterTitle'],
+        isVerified: parsedJson['isVerified'],
+        verification: parsedJson['verification'],
+        verifiedCount: parsedJson['verifiedCount'],
+        contacts: new List<String>.from(parsedJson['contacts']),
+        messages: parseMessages(json['messages'])
+    );
+  }
+
+  static List<CardMessage> parseMessages(messagesJson){
+    var list  = messagesJson as List;
+    List<CardMessage> messageList = list.map((data)=>CardMessage.fromJson(data)).toList();
+    return messageList;
+  }
   
+  String get thumbAddress{
+    return 'assets/images/icons/'+this.thumbnail;
+  }
 }
 
-class Message {
+class CardMessage {
   final String body;
-  final String time;
+  final int timestamp;
+  DateTime dateTime;
+  String get date{
+    return DateFormat("dd MMMM yyyy").format(dateTime).toUpperCase();
+  }   
+  String get time{
+    return DateFormat("hh:mm a").format(dateTime);
+  }   
 
-  Message(this.body, this.time);
-//  factory Message.fromJson(Map<String, dynamic> parsedJson){
-//    return Message(
-//        body:parsedJson['body'],
-//        time:parsedJson['time']
-//    );
-//  }
+  CardMessage({this.body, this.timestamp}){
+    this.dateTime = DateTime.fromMillisecondsSinceEpoch(this.timestamp);
+  }
+
+  factory CardMessage.fromJson(var json) {
+    Map<String, dynamic> parsedJson = Map<String, dynamic>.from(json);
+    return CardMessage(body: parsedJson['body'], timestamp: parsedJson['time']);
+  }
 }

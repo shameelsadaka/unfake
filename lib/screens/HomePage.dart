@@ -24,8 +24,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
-
     _isSearching = false;
     _searchBoxFocus.addListener(_onSearchBoxFocusChange);
     _searchString = null;
@@ -89,7 +87,6 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-
           SizedBox(height: 20),
 
           

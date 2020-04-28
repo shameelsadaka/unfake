@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 //Here Happens all the Firebase Integrations...
 import 'package:firebase_database/firebase_database.dart';
 import 'package:itstrue/data/class/CardModel.dart';
-import '../class/CardModel.dart';
 
 class FireBaseUser {
   String verificationId;
@@ -136,6 +135,7 @@ class FireBaseUser {
     });
   }
 
+
   Future deleteCard(postId) {
     userUid().then((value) {
       databaseReference
@@ -160,10 +160,9 @@ class FireBaseUser {
           }
         }
         return false;
-      });
-    });
-  }
-
+  });
+          });
+        }
   Future reportCard(postId) {
     userUid().then((value) {
       databaseReference
@@ -226,58 +225,34 @@ class FireBaseUser {
       var data = snap.value;
       var keys = snap.value.keys;
       if (data != null) {
-        for (var key in keys) {
-          print(data[key]);
-          CardModel searchedCard = new CardModel(
-            data[key]['postId'],
-            data[key]['title'],
-            data[key]['template'],
-            data[key]['thumbnail'],
-            data[key]['requesterId'],
-            data[key]['requesterName'],
-            data[key]['requesterTitle'],
-            data[key]['isVerified'],
-            data[key]['verifiedCount'],
-            data[key]['message'],
-            data[key]['contacts'].cast<int>(),
-          );
-          searchedCardData.add(searchedCard);
-          return searchedCardData;
-        }
+ for(var key in keys)
+   {
+     searchedCardData.add(new CardModel.fromJson(data[key]));
+   }
       } else {
         return null;
       }
       return null;
     });
+    return searchedCardData;
   }
 
-  getCardData() {
+  Future<List<CardModel>> getCardData() async {
     List<CardModel> cardDataList = [];
-    FirebaseDatabase.instance
+    await FirebaseDatabase.instance
         .reference()
         .child('posts')
         .once()
         .then((DataSnapshot snap) {
-      var data = snap.value;
-      var keys = snap.value.keys;
-      for (var key in keys) {
-        print(data[key]);
-        CardModel carddata = new CardModel(
-          data[key]['postId'],
-          data[key]['title'],
-          data[key]['template'],
-          data[key]['thumbnail'],
-          data[key]['requesterId'],
-          data[key]['requesterName'],
-          data[key]['requesterTitle'],
-          data[key]['isVerified'],
-          data[key]['verifiedCount'],
-          data[key]['message'],
-          data[key]['contacts'].cast<int>(),
-        );
-        cardDataList.add(carddata);
+
+
+          var data = snap.value;
+          var keys = snap.value.keys;
+          for (var key in keys) {
+              cardDataList.add(new CardModel.fromJson(data[key]));
+          }
       }
-    });
+    );
     return cardDataList;
   }
 }

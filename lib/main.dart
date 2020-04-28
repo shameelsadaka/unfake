@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'theme.dart';
-import 'AppLayout.dart';
-
-
-import 'screens/HomePage.dart';
-import 'screens/LoginPage.dart';
-import 'screens/PostViewPage.dart';
-import 'screens/SetupProfilePage.dart';
-import 'screens/ProfilePage.dart';
-import 'screens/NewPostPage.dart';
-
+import 'router.dart';
 
 void main() {
   runApp(ItsTrueApp());
@@ -25,14 +16,7 @@ class ItsTrueApp extends StatelessWidget {
       title: appName,
       theme: getThemeData(), // Theme Data is Set in theme.dart
       initialRoute: '/home',
-      routes: {
-        '/home':(context)=>AppLayout(body:HomePage()),
-        '/login':(context)=>AppLayout(body:LoginPage()),
-        '/post':(context)=>AppLayout(body:PostViewPage()),
-        '/setup_profile':(context)=>AppLayout(body:SetupProfilePage()),
-        '/profile':(context)=>AppLayout(body:ProfilePage()),
-        '/new_post':(context)=>AppLayout(body:NewPostPage(),newPostButton: false),
-      }
+      onGenerateRoute: generateRoute,
     );
   }
 }
