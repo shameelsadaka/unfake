@@ -65,6 +65,9 @@ class DataHandler {
     _auth.updateCard(postid, body);
   }
 
+  Future<CardModel> getCardFromId(String postId){
+    return _auth.getCardFromId(postId);
+  }
 
 
   // 

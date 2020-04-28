@@ -255,4 +255,24 @@ class FireBaseUser {
     );
     return cardDataList;
   }
+
+
+  Future<CardModel> getCardFromId(String postId) async {
+    CardModel card;
+    await FirebaseDatabase.instance
+        .reference()
+        .child('posts')
+        .orderByChild('postId')
+        .equalTo(postId)
+        .once()
+        .then((DataSnapshot snap) {
+          var key = snap.value.keys.first;
+          card = new CardModel.fromJson(snap.value[key]);
+    }).catchError((e){
+      print("Error while accessing card");
+    });
+    return card;
+  }
+  
+  
 }

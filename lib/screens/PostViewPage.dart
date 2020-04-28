@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/screens/components/SharableCard.dart';
@@ -40,6 +41,7 @@ class _PostViewPageState extends State<PostViewPage> {
       print(uid);
       print(cardData.requesterId);
     });
+    _reloadPost();
     super.initState();
   }
 
@@ -100,12 +102,21 @@ class _PostViewPageState extends State<PostViewPage> {
   }
 
   Future<bool> _reloadPost() async{
-    ///
-    /// TODO:
-    /// * Create a function getPostByID in controller 
-    /// * Create a function getPostByID in firebase
-    ///
-
+    CardModel newCardData = await _dataHandler.getCardFromId(cardData.postId);    
+    if(newCardData != null){
+      setState(() {
+        cardData = newCardData;
+      });
+    }
+    else{
+      Fluttertoast.showToast(
+        msg: "Unable to reload post from server. \n Check your internet",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 5,
+        textColor:Colors.red,
+        gravity: ToastGravity.CENTER,
+      );
+    }
     return true;
   }
 
