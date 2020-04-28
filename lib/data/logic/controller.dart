@@ -54,4 +54,12 @@ class DataHandler {
     Future<List<CardModel>> getAllData(){
       return _auth.getCardData();
     }
+    
+    Future updateCard(postid,body){
+      _auth.updateCard(postid,body);
+    }
+
+    
 }
+
+

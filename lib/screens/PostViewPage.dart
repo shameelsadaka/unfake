@@ -89,6 +89,7 @@ class _PostViewPageState extends State<PostViewPage> {
             FlatButton(
               child: Text('UPDATE'),
               onPressed: () {
+                _dataHandler.updateCard(cardData.postId, newUpdateText);
                 Navigator.of(context).pop(newUpdateText);
               },
             ),
