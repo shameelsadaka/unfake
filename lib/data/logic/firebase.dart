@@ -99,6 +99,7 @@ class FireBaseUser {
           "contacts": ["+91 9876543210", "+91 9956858388"],
           "isVerified": isVerified,
           "verifiedCount": 0,
+          "status": true
         });
       });
     } catch (e) {
@@ -132,6 +133,108 @@ class FireBaseUser {
         }
       });
     });
+  }
+
+
+  Future deleteCard(postId) {
+    userUid().then((value) {
+      databaseReference
+          .child('posts')
+          .orderByChild('postId')
+          .equalTo(postId)
+          .once()
+          .then((DataSnapshot snap) {
+        var data = snap.value;
+        var keys = snap.value.keys;
+
+        if (data == null) {
+          return false;
+        } else {
+          for (var key in keys) {
+            if (this.userId == data[key]['requesterId']) {
+              databaseReference.child('posts').child(key).remove();
+              return true;
+            } else {
+              return false;
+            }
+          }
+        }
+        return false;
+  });
+          });
+        }
+  Future reportCard(postId) {
+    userUid().then((value) {
+      databaseReference
+          .child('posts')
+          .orderByChild('postId')
+          .equalTo(postId)
+          .once()
+          .then((DataSnapshot snap) {
+        var data = snap.value;
+        var keys = snap.value.keys;
+        print(data);
+
+        if (data == null) {
+          return false;
+        } else {
+          for (var key in keys) {
+            var count = data[key]['reports'].length;
+            //Set Status of Card to False if reported by 3 persons
+            if (count >= 2) {
+              databaseReference
+                  .child('posts')
+                  .child(key)
+                  .set({"status": false});
+            }
+            //Adding reported user info to report tag
+            databaseReference
+                .child('posts')
+                .child(key)
+                .child('reports')
+                .orderByChild('userId')
+                .equalTo(this.userId)
+                .once()
+                .then((DataSnapshot snaps) {
+              if (snaps.value == null) {
+                databaseReference
+                    .child('posts')
+                    .child(key)
+                    .child('reports')
+                    .push()
+                    .set({
+                  "userId": this.userId,
+                });
+              }
+            });
+          }
+        }
+        return false;
+      });
+    });
+  }
+
+  searchCard(postId) {
+    List<CardModel> searchedCardData = [];
+    FirebaseDatabase.instance
+        .reference()
+        .orderByChild('postId')
+        .equalTo(postId)
+        .once()
+        .then((DataSnapshot snap) {
+      var data = snap.value;
+      var keys = snap.value.keys;
+      if (data != null) {
+ for(var key in keys)
+   {
+     searchedCardData.add(new CardModel.fromJson(data[key]));
+   }
+      } else {
+        return null;
+      }
+      return null;
+    });
+    return searchedCardData;
   }
 
   Future<List<CardModel>> getCardData() async {
