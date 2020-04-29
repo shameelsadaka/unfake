@@ -36,6 +36,8 @@ class _NewPostPageState extends State<NewPostPage> {
   final phone2 = TextEditingController();
 
 
+
+
   CardTemplate _cardTemplate;
   String _selectedIcon;
   
@@ -53,7 +55,6 @@ class _NewPostPageState extends State<NewPostPage> {
 
 
   void _createNewPost(){
-print(_cardTemplate.bgImageName);
 data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIcon,phone1.text,phone2.text,requestername.text,designation.text);
   }
   
@@ -129,6 +130,12 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                                   color: Colors.black54 
                                 ),
                               ),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter Title';
+                                }
+                                return null;
+                              },
                             )
                           ),
                         ),
@@ -183,6 +190,12 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                           color: Colors.black54 
                         ),
                       ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter your Message';
+                          }
+                          return null;
+                        }
                     )
                   ),
 
@@ -274,6 +287,12 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                           color: Colors.black54,
                         ),
                       ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter Requester Name';
+                          }
+                          return null;
+                        }
                     )
                   ),
 
@@ -305,10 +324,12 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child:TextFormField(
                       controller: phone1,
+                      keyboardType: TextInputType.number,
                       style: TextStyle(
                         color: Colors.black,
                       ),
                       decoration: InputDecoration(
+                        prefixText: '+91',
                         labelText: 'Phone Number',
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(width: 1.0, color: Colors.black54 )
@@ -321,6 +342,16 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                           color: Colors.black54,
                         ),
                       ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a contact number';
+                          }
+                          else if(value.length != 10)
+                            {
+                              return "Enter a valid contact number";
+                            }
+                          return null;
+                        }
                     )
                   ),
 
@@ -329,10 +360,12 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child:TextFormField(
                       controller: phone2,
+                      keyboardType: TextInputType.number,
                       style: TextStyle(
                         color: Colors.black,
                       ),
                       decoration: InputDecoration(
+                        prefixText: '+91',
                         labelText: 'Second Phone Number (Optional)',
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(width: 1, color: Colors.black54)
@@ -345,6 +378,12 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                           color: Colors.black54,
                         ),
                       ),
+                        validator: (value) {
+                          if (value.length !=0 && value.length != 10) {
+                            return "Enter a valid contact number";
+                          }
+                          return null;
+                        }
                     )
                   ),
 
@@ -355,7 +394,17 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
                       borderSide: BorderSide(
                         color: _cardTemplate.footerTextColor,
                       ),
-                      onPressed: _createNewPost,
+                      onPressed: (){
+                        if (_formKey.currentState.validate()) {
+                          _createNewPost();
+                          Scaffold
+                              .of(context)
+                              .showSnackBar(SnackBar(content: Text(
+                              'Creating New Post')));
+                          Navigator.of(context).pushReplacementNamed('/profile');
+
+                        }
+                      },
                       child:Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[

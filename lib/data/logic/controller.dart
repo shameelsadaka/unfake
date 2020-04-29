@@ -41,6 +41,8 @@ class DataHandler {
     String uuid = '${timeStamp.toString()}${rng.nextInt(9).toString()}';
     int uid = int.parse(uuid);
 
+    phone1 = "+91" + phone1;
+    phone2 = "+91" + phone2;
     //Generate Post ID
     String alpha = randomAlpha(3).toUpperCase();
     String num = randomBetween(1001, 9999).toString();
