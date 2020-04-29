@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
+
+import 'package:fluttertoast/fluttertoast.dart';
+
+
 import 'package:itstrue/data/class/CardModel.dart';
+import 'package:itstrue/data/logic/controller.dart';
 import 'package:itstrue/screens/components/CardMessageBox.dart';
 
 class CarouselCard extends StatelessWidget {
   final CardModel cardData;
+
+  DataHandler _dataHandler = DataHandler();
 
   CarouselCard({Key key, this.cardData}) : super(key: key);  
 
 
 
     void postAction(String action) {
-    print(action);
-
-    switch(action){
-      case "share":
-        break;
+    switch (action) {
       case "report":
         break;
-      case "save":
+      case "savepost":
+        _dataHandler.savePostLocally(cardData.postId).then((value){
+          Fluttertoast.showToast(
+            msg: "Post Saved",
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            gravity: ToastGravity.BOTTOM,
+          );
+        });
         break;
-      
     }
-    ///
-    ///   To be expanded
-    /// 
-    ///   TODO
-    ///   * Extract this function to the controller
-    /// 
-    ///   There is a copy of this function in post view
-    ///
-    
   }
   
   

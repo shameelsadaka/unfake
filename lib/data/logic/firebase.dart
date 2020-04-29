@@ -12,8 +12,8 @@ class FireBaseUser {
   String userName = "User";
   String userTitle = "None";
   // Firebase Phone Auth
-  Future loginStatus() async {
-    return await FirebaseAuth.instance.currentUser();
+  Future<bool> loginStatus() async {
+    return (await FirebaseAuth.instance.currentUser()) != null;
   }
 
   Future<void> signOut() async {
@@ -24,6 +24,18 @@ class FireBaseUser {
     var uid = await FirebaseAuth.instance.currentUser();
     this.userId = uid.uid;
     return uid.uid;
+  }
+
+  Future<String> getUserName() async {
+    return userUid().then((value) {
+      return databaseReference
+          .child('users')
+          .child(value)
+          .once()
+          .then((DataSnapshot snap) {
+        return snap.value['name'];
+      });
+    });
   }
 
   Future<bool> verifyPhone(phoneNumber) async {
@@ -135,7 +147,6 @@ class FireBaseUser {
     });
   }
 
-
   Future deleteCard(postId) {
     userUid().then((value) {
       databaseReference
@@ -160,9 +171,10 @@ class FireBaseUser {
           }
         }
         return false;
-  });
-          });
-        }
+      });
+    });
+  }
+
   Future reportCard(postId) {
     userUid().then((value) {
       databaseReference
@@ -225,10 +237,9 @@ class FireBaseUser {
       var data = snap.value;
       var keys = snap.value.keys;
       if (data != null) {
- for(var key in keys)
-   {
-     searchedCardData.add(new CardModel.fromJson(data[key]));
-   }
+        for (var key in keys) {
+          searchedCardData.add(new CardModel.fromJson(data[key]));
+        }
       } else {
         return null;
       }
@@ -244,15 +255,54 @@ class FireBaseUser {
         .child('posts')
         .once()
         .then((DataSnapshot snap) {
-
-
-          var data = snap.value;
-          var keys = snap.value.keys;
-          for (var key in keys) {
-              cardDataList.add(new CardModel.fromJson(data[key]));
-          }
+      var data = snap.value;
+      if(data != null){
+        var keys = snap.value.keys;
+        for (var key in keys) {
+          cardDataList.add(new CardModel.fromJson(data[key]));
+        }
       }
-    );
+    });
     return cardDataList;
+  }
+
+  Future<List<CardModel>> getUserCards() async {
+    List<CardModel> cardDataList = [];
+    await userUid().then((userid) async{
+      await FirebaseDatabase.instance
+          .reference()
+          .child('posts')
+          .orderByChild('requesterId')
+          .equalTo(userid)
+          .once()
+          .then((DataSnapshot snap) {
+            var data = snap.value;
+            if(data != null){
+              var keys = snap.value.keys;
+              for (var key in keys) {
+                cardDataList.add(new CardModel.fromJson(data[key]));
+              }
+            }
+      });
+
+    });
+    return cardDataList;
+  }
+
+  Future<CardModel> getCardFromId(String postId) async {
+    CardModel card;
+    await FirebaseDatabase.instance
+        .reference()
+        .child('posts')
+        .orderByChild('postId')
+        .equalTo(postId)
+        .once()
+        .then((DataSnapshot snap) {
+      var key = snap.value.keys.first;
+      card = new CardModel.fromJson(snap.value[key]);
+    }).catchError((e) {
+      print("Error while accessing card");
+    });
+    return card;
   }
 }
