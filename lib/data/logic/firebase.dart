@@ -119,36 +119,35 @@ class FireBaseUser {
     }
   }
 
-  Future updateCard(postId, body) {
-    userUid().then((value) {
-      databaseReference
-          .child('posts')
-          .orderByChild('postId')
-          .equalTo(postId)
-          .once()
-          .then((DataSnapshot snap) {
-        var data = snap.value;
-        var keys = snap.value.keys;
+  Future<bool> updateCard(postId, body){
+    return FirebaseDatabase.instance
+        .reference()
+        .child('posts')
+        .orderByChild('postId')
+        .equalTo(postId)
+        .once()
+        .then((DataSnapshot snap) {
+            var postKey = snap.value.keys.first;
+            // Map<String, dynamic> parsedJson = Map<String, dynamic>.from(snap.value[key]);
 
-        if (data == null) {
-          return null;
-        } else {
-          for (var key in keys) {
+            
+            List messageList  = snap.value[postKey]['messages'] as List;
             int timeStamp = new DateTime.now().millisecondsSinceEpoch;
-            databaseReference
-                .child('posts')
-                .child(key)
-                .child('messages')
-                .push()
-                .set({"body": body, "time": timeStamp});
-          }
-        }
-      });
+            List newMessagelist = [ ...messageList , {'body': body, 'time': timeStamp}];
+
+            print('messageList');
+            databaseReference.child('posts').child(postKey).update({"messages":newMessagelist});
+            
+            return true;
+
+    }).catchError((e) {
+      print("Error while updating card");
+      return false;
     });
   }
 
   Future deleteCard(postId) {
-    userUid().then((value) {
+    return userUid().then((value) {
       databaseReference
           .child('posts')
           .orderByChild('postId')
