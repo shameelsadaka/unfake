@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:itstrue/data/logic/firebase.dart';
+import 'package:itstrue/data/logic/controller.dart';
 
 class SetupProfilePage extends StatelessWidget {
-  final _auth = FireBaseUser();
+  final data = DataHandler();
   final name = TextEditingController();
   final designation = TextEditingController();
   @override
@@ -35,15 +35,18 @@ class SetupProfilePage extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         nameField(),
-                        Divider(color: Colors.black26, height: 3),
-                        designationField(),
                       ],
                     ),
                   ),
                   SizedBox(height: 20),
                   RaisedButton(
                     onPressed: () {
-                      _auth.writeProfile(name.text, designation.text);
+                      if(name.text.length !=0)
+                        {
+                          data.writeProfile(name.text);
+                          Navigator.of(context).pushReplacementNamed('/home');
+                        }
+
                     },
                     color: Theme.of(context).primaryColor,
                     textColor: Colors.white,

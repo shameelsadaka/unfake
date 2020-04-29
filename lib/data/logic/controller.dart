@@ -146,4 +146,7 @@ class DataHandler {
   Future<List<CardModel>> searchCard(postId){
     return searchCard(postId);
   }
+  writeProfile(name){
+    _auth.writeProfile(name);
+  }
 }

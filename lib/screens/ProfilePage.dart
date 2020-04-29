@@ -18,8 +18,10 @@ class _ProfilePageState extends State<ProfilePage> {
     _dataHandler.getUserName().then((username){
       setState(() {
         _username = username;
+
       });
     });
+
     super.initState();
   }  
 
@@ -29,6 +31,13 @@ class _ProfilePageState extends State<ProfilePage> {
     _dataHandler.loginStatus().then((isLoggedIn){
       if(isLoggedIn == false){
           Navigator.of(context).pushReplacementNamed('/login');
+      }
+    });
+    _dataHandler.getUserName().then((completed){
+
+      if(completed == null)
+      {
+        Navigator.of(context).pushReplacementNamed('/setup_profile');
       }
     });
 

@@ -14,6 +14,7 @@ class _NewPostPageState extends State<NewPostPage> {
 
 
   final data = DataHandler();
+
   final List<CardTemplate> _cardTemplates = [
       new CardTemplate.redCard(),
       new CardTemplate.blueCard(),
@@ -63,6 +64,13 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
 
   @override
   Widget build(BuildContext context) {
+    data.getUserName().then((completed){
+
+      if(completed == null)
+      {
+        Navigator.of(context).pushReplacementNamed('/setup_profile');
+      }
+    });
     return Expanded(
       child: SingleChildScrollView(
         child: Container(

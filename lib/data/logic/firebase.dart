@@ -33,8 +33,16 @@ class FireBaseUser {
           .child(value)
           .once()
           .then((DataSnapshot snap) {
-            this.userName = snap.value['name'];
-        return snap.value['name'];
+            if(snap.value != null)
+              {
+                this.userName = snap.value['name'];
+                return snap.value['name'];
+              }
+            else {
+              return null;
+            }
+
+
       });
     });
   }
@@ -81,13 +89,13 @@ class FireBaseUser {
 
   //Data Handling
   //ToDo Complete Firebase storing Code
-  Future writeProfile(name, designation) async {
+  Future writeProfile(name) async {
     try {
       userUid().then((value) {
         databaseReference
             .child('users')
             .child(value)
-            .set({'name': name, 'designation': designation});
+            .set({'name': name});
       });
     } catch (e) {
       print(e.details);
