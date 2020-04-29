@@ -128,17 +128,14 @@ class FireBaseUser {
         .once()
         .then((DataSnapshot snap) {
             var postKey = snap.value.keys.first;
-            // Map<String, dynamic> parsedJson = Map<String, dynamic>.from(snap.value[key]);
-
-            
             List messageList  = snap.value[postKey]['messages'] as List;
             int timeStamp = new DateTime.now().millisecondsSinceEpoch;
             List newMessagelist = [ ...messageList , {'body': body, 'time': timeStamp}];
-
-            print('messageList');
-            databaseReference.child('posts').child(postKey).update({"messages":newMessagelist});
-            
-            return true;
+            return databaseReference.child('posts').child(postKey).update({"messages":newMessagelist}).then((v){
+              return true;
+            }).catchError((e){
+              return false;
+            });
 
     }).catchError((e) {
       print("Error while updating card");
