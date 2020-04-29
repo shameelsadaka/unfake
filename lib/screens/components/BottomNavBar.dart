@@ -11,11 +11,11 @@ class BottomNavBar extends StatelessWidget {
   
 
   final List<BottomNavItem> bottomIcons = [
-    BottomNavItem('/home',Icons.home),
-    BottomNavItem('/saved_posts',Icons.bookmark),
+    BottomNavItem('Home','/home',Icons.home),
+    BottomNavItem('Saved Posts','/saved_posts',Icons.bookmark),
     null,
-    BottomNavItem('/myposts',Icons.mode_comment),
-    BottomNavItem('/settings',Icons.settings),
+    BottomNavItem('My Posts','/myposts',Icons.mode_comment),
+    BottomNavItem('Settings','/settings',Icons.settings),
   ];
 
   @override
@@ -25,7 +25,7 @@ class BottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: bottomIcons.map((item){
-          return item == null?new SizedBox(width: 20):BottomNavBarItemUI(icon:item.icon,route:item.routeName,isActive: ModalRoute.of(context).settings.name == item.routeName);
+          return item == null?new SizedBox(width: 50):BottomNavBarItemUI(icon:item.icon,name:item.name,route:item.routeName,isActive: ModalRoute.of(context).settings.name == item.routeName);
         }).toList(),
       ),
     );
@@ -36,8 +36,8 @@ class BottomNavBar extends StatelessWidget {
 class BottomNavItem{
   String routeName;
   IconData icon;
-
-  BottomNavItem(this.routeName,this.icon);
+  String name;
+  BottomNavItem(this.name,this.routeName,this.icon);
 }
 
 
@@ -48,9 +48,10 @@ class BottomNavBarItemUI extends StatelessWidget {
   final bool isActive;
   final String route;
   final IconData icon;
-  
+  final String name;
   const BottomNavBarItemUI({
     Key key,
+    this.name,
     this.isActive =false,
     this.icon,  
     this.route,
@@ -58,16 +59,23 @@ class BottomNavBarItemUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return FlatButton(
       onPressed: (){
         if(!isActive){
           Navigator.of(context).pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false); 
         }
       },
-      padding: EdgeInsets.symmetric(horizontal: 0,vertical:20.0), 
-      icon: Icon(
-        icon,
-        color: isActive?Theme.of(context).primaryColor:Colors.black,
+      padding: EdgeInsets.symmetric(horizontal: 0,vertical:15.0), 
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(
+            icon,
+            size: 18,
+            color: isActive?Theme.of(context).primaryColor:Colors.black,
+          ),
+          Text(name,style:TextStyle(fontSize: 9,color: isActive?Theme.of(context).primaryColor:Colors.black))
+        ],
       ),
     );
   }
