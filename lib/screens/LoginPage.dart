@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                       var a = _auth.loginStatus();
                       try {
                         await _auth.signIn(this._otpCode);
-                        Navigator.of(context).pushReplacementNamed('/profile');
+                        Navigator.of(context).pushReplacementNamed('/setup_profile');
                       } catch (e) {
                           setState(() {
                             if(e.code == "ERROR_INVALID_VERIFICATION_CODE")
