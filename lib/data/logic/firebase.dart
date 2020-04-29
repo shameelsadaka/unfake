@@ -22,8 +22,13 @@ class FireBaseUser {
 
   Future<String> userUid() async {
     var uid = await FirebaseAuth.instance.currentUser();
-    this.userId = uid.uid;
-    return uid.uid;
+    if(uid != null){
+      this.userId = uid.uid;
+      return uid.uid;
+    }
+    else{
+      return null;
+    }
   }
 
   Future<String> getUserName() async {
