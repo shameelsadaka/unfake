@@ -71,7 +71,7 @@ class DataHandler {
 
 
   Future<List<CardModel>> getUserPosts() {
-    return _auth.getCardData();
+    return _auth.getUserCards();
   }
 
   //
