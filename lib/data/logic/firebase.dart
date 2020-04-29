@@ -94,7 +94,7 @@ class FireBaseUser {
   }
 
   Future cardData(timestamp, title, uid, alphanumeric, isVerified, template,
-      thumbnail, body) async {
+      thumbnail, body,phone1,phone2) async {
     try {
       userUid().then((value) {
         databaseReference.child('posts').push().set({
@@ -108,7 +108,7 @@ class FireBaseUser {
           "messages": [
             {"body": body, "time": timestamp}
           ],
-          "contacts": ["+91 9876543210", "+91 9956858388"],
+          "contacts": [phone1,phone2],
           "isVerified": isVerified,
           "verifiedCount": 0,
           "status": true

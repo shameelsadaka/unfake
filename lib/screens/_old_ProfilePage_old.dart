@@ -38,7 +38,7 @@ final designation = TextEditingController();
                           String template = 'red';
                           bool isVerified = false;
                           String thumbnail = 'blood_icon_red.png';
-                          data.createCard(title,body,template,isVerified,thumbnail);
+                          data.createCard(title,body,template,thumbnail,"929292","929292");
                           print("Clicked on Add Post");
                         },
                         color: Theme.of(context).primaryColor,

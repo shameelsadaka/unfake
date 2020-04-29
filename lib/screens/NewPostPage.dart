@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:itstrue/data/logic/controller.dart';
 
-
+import '../data/logic/controller.dart';
 import 'templates/CardTemplate.dart';
 
 class NewPostPage extends StatefulWidget {
@@ -10,7 +11,9 @@ class NewPostPage extends StatefulWidget {
 }
 
 class _NewPostPageState extends State<NewPostPage> {
-  
+
+
+  final data = DataHandler();
   final List<CardTemplate> _cardTemplates = [
       new CardTemplate.redCard(),
       new CardTemplate.blueCard(),
@@ -25,9 +28,13 @@ class _NewPostPageState extends State<NewPostPage> {
   ];
 
 
-  ///
-  /// Post Variables
-  ///
+  final title = TextEditingController();
+  final message = TextEditingController();
+  final requestername = TextEditingController();
+  final designation  = TextEditingController();
+  final phone1 = TextEditingController();
+  final phone2 = TextEditingController();
+
 
   CardTemplate _cardTemplate;
   String _selectedIcon;
@@ -42,8 +49,11 @@ class _NewPostPageState extends State<NewPostPage> {
     _selectedIcon = null;
   }
 
-  void _createNewPost(){
 
+
+
+  void _createNewPost(){
+data.createCard(title, message, _cardTemplate, _cardTemplate,phone1,phone2);
   }
   
 
@@ -108,6 +118,7 @@ class _NewPostPageState extends State<NewPostPage> {
                               ),
                               keyboardType: TextInputType.text,
                               minLines: 1,
+                              controller: title,
                               maxLines: 3,
                               decoration: InputDecoration(
                                 labelText: 'Post Title',
@@ -161,6 +172,7 @@ class _NewPostPageState extends State<NewPostPage> {
                       ),
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
+                      controller: message,
                       maxLines: 10,
                       decoration: InputDecoration(
                         labelText: 'Message',
@@ -244,6 +256,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child:TextFormField(
+                      controller: requestername,
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -267,6 +280,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child:TextFormField(
+                      controller: designation,
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -289,6 +303,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child:TextFormField(
+                      controller: phone1,
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -312,6 +327,7 @@ class _NewPostPageState extends State<NewPostPage> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child:TextFormField(
+                      controller: phone2,
                       style: TextStyle(
                         color: Colors.black,
                       ),

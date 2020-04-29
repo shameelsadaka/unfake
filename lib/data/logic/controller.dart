@@ -29,17 +29,9 @@ class DataHandler {
     _auth.signOut();
   }
 
-  createCard(title, body, template, isVerified, thumbnail) {
-    String title =
-        "കൊച്ചി അമൃത ഹോസപിറ്റലിൽ  ആക്സിഡന്‍റ് ആയി കിടക്കുന്ന യുവാവിന് നാല് കൂപ്പി A+ ബ്ലഡ് ആവശ്യമുണ്ട്‌.";
-    String body =
-        "രക്തം നല്‍കാന്‍ തയ്യാറായി 2 പേർ വന്നിട്ടുണ്ട്. 2 പേരെ കൂടി ആവശ്യമുണ്ട്";
-    //General Defaults
-    String template = 'red';
-    bool isVerified = false;
-    String thumbnail = 'blood_icon_red.png';
-
+  createCard(title, body, template, thumbnail,phone1,phone2) {
     //Generate Post ID and Card ID
+    var isVerified = false;
     //timestamp
     int timeStamp = new DateTime.now().millisecondsSinceEpoch;
     //unique id generation using timestamp and random integer
@@ -54,7 +46,7 @@ class DataHandler {
 
     //Passing datas to Firebase Function Class
     _auth.cardData(timeStamp, title, uid, alphanumeric, isVerified, template,
-        thumbnail, body);
+        thumbnail, body,phone1,phone2);
   }
 
   Future<List<CardModel>> getAllData() {
