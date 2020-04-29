@@ -13,12 +13,12 @@ import 'package:itstrue/data/logic/firebase.dart';
 
 class DataHandler {
   final _auth = FireBaseUser();
-  bool loginStatus() {
-    if (_auth.loginStatus() != null) {
-      return true;
-    } else {
-      return false;
-    }
+  Future<bool> loginStatus() async{
+    return await _auth.loginStatus();
+  }
+
+  Future<String> getUserName() async {
+    return _auth.getUserName();
   }
 
   Future<String> getUserUid() async {
@@ -69,6 +69,9 @@ class DataHandler {
     return _auth.getCardFromId(postId);
   }
 
+  Future<List<CardModel>> getUserPosts() {
+    return _auth.getCardData();
+  }
 
   // 
   //

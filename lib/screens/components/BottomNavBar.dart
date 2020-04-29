@@ -14,7 +14,7 @@ class BottomNavBar extends StatelessWidget {
     BottomNavItem('Home','/home',Icons.home),
     BottomNavItem('Saved Posts','/saved_posts',Icons.bookmark),
     null,
-    BottomNavItem('My Posts','/myposts',Icons.mode_comment),
+    BottomNavItem('My Posts','/profile',Icons.mode_comment),
     BottomNavItem('Settings','/settings',Icons.settings),
   ];
 

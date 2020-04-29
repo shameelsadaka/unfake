@@ -1,79 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:itstrue/data/logic/controller.dart';
-class ProfilePage extends StatelessWidget {
+import 'package:itstrue/data/class/CardModel.dart';
+import 'package:itstrue/screens/components/MiniCard.dart';
 
 
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
 
+class _ProfilePageState extends State<ProfilePage> {
+  final _dataHandler = DataHandler();
 
-final name = TextEditingController();
-final data = DataHandler();
-final designation = TextEditingController();
+  String _username;
+  @override
+  void initState() {
+    _dataHandler.getUserName().then((username){
+      setState(() {
+        _username = username;
+      });
+    });
+    super.initState();
+  }  
+
   @override
   Widget build(BuildContext context) {
+
+    _dataHandler.loginStatus().then((isLoggedIn){
+      if(isLoggedIn == false){
+          Navigator.of(context).pushReplacementNamed('/login');
+      }
+    });
+
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+            padding: EdgeInsets.all(20),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Hello User",
-                    style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.black
-                    ),
-                  ),
-                  SizedBox(height: 60),
-
-
                   Row(
                     children: <Widget>[
                       
-                      RaisedButton.icon(
-                        onPressed: () {
-                          String title = "കൊച്ചി അമൃത ഹോസപിറ്റലിൽ  ആക്സിഡന്‍റ് ആയി കിടക്കുന്ന യുവാവിന് നാല് കൂപ്പി A+ ബ്ലഡ് ആവശ്യമുണ്ട്‌.";
-                          String body = "രക്തം നല്‍കാന്‍ തയ്യാറായി 2 പേർ വന്നിട്ടുണ്ട്. 2 പേരെ കൂടി ആവശ്യമുണ്ട്";
-                          String template = 'red';
-                          bool isVerified = false;
-                          String thumbnail = 'blood_icon_red.png';
-                          data.createCard(title,body,template,isVerified,thumbnail);
-                          print("Clicked on Add Post");
-                        },
-                        color: Theme.of(context).primaryColor,
-                        textColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                        icon:Icon(Icons.add_comment,size: 18),
-                        label: const Text(
-                            'Add Posts',
-                            style: TextStyle(fontSize: 15)
+                      if(_username != null)
+                      Text(
+                        "Hi " + _username,
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black
                         ),
                       ),
 
 
-                      SizedBox(width: 10),
+                      Expanded(child: new Container()),
 
 
                       RaisedButton.icon(
                         onPressed: () {
-                          data.signOut();
+                          _dataHandler.signOut();
                           Navigator.of(context).pushNamed('/login');
                         },
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                        icon:Icon(Icons.lock_open,size: 18),
+                        icon:Icon(Icons.lock_open,size: 16),
                         label: const Text(
                             'Sign out',
-                            style: TextStyle(fontSize: 15)
+                            style: TextStyle(fontSize: 14)
                         ),
                       )
                       
                       
                     ],
                   ),
+
+                  SizedBox(height: 30),
+
+                  FutureBuilder(
+                    future: _dataHandler.getUserPosts(),
+                    builder: (BuildContext context,snap){
+                      if(snap.connectionState == ConnectionState.done){
+                        List<CardModel> cards = snap.data;
+                        return Column(
+                          children:cards.map((cardData)=>
+                            MiniCard(cardData:cardData,showName: false)
+                          ).toList()
+                          
+                        );
+                      }
+                      else{
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                    },
+                  )
 
 
 
@@ -82,40 +106,6 @@ final designation = TextEditingController();
             )
         ),
       ),
-    );
-  }
-  Container nameField() {
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-        child: TextField(
-          controller: name,
-            style: TextStyle(
-              fontSize: 14.0,
-            ),
-            textAlignVertical: TextAlignVertical.center,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              prefixIcon: Icon(Icons.person, color: Colors.black, size: 18),
-              hintText: 'Full Name',
-            )
-        )
-    );
-  }
-  Container designationField() {
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-        child: TextField(
-          controller: designation,
-            style: TextStyle(
-              fontSize: 14.0,
-            ),
-            textAlignVertical: TextAlignVertical.center,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              prefixIcon: Icon(Icons.description, color: Colors.black, size: 18),
-              hintText: 'Enter your Designation',
-            )
-        )
     );
   }
 }

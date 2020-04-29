@@ -12,8 +12,8 @@ class FireBaseUser {
   String userName = "User";
   String userTitle = "None";
   // Firebase Phone Auth
-  Future loginStatus() async {
-    return await FirebaseAuth.instance.currentUser();
+  Future<bool> loginStatus() async {
+    return (await FirebaseAuth.instance.currentUser()) != null;
   }
 
   Future<void> signOut() async {
@@ -25,6 +25,18 @@ class FireBaseUser {
     this.userId = uid.uid;
     return uid.uid;
   }
+  Future<String> getUserName() async{
+    return userUid().then((value) {
+      return databaseReference
+        .child('users')
+        .child(value)
+        .once()
+        .then((DataSnapshot snap) {
+          return snap.value['name'];
+        });
+    });
+  }
+
 
   Future<bool> verifyPhone(phoneNumber) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
