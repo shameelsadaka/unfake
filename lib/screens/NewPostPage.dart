@@ -64,12 +64,18 @@ data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIc
 
   @override
   Widget build(BuildContext context) {
-    data.getUserName().then((completed){
-
+    data.loginStatus().then((isLoggedIn){
+      if(isLoggedIn == false){
+          Navigator.of(context).pushReplacementNamed('/login');
+      }
+      
+      data.getUserName().then((completed){
       if(completed == null)
       {
         Navigator.of(context).pushReplacementNamed('/setup_profile');
       }
+    });
+
     });
     return Expanded(
       child: SingleChildScrollView(
