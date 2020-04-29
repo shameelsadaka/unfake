@@ -25,6 +25,7 @@ class MiniCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: (){
           Navigator.of(context).pushNamed('/post',arguments:cardData);
         },
