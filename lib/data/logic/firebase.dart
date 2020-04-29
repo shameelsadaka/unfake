@@ -9,7 +9,7 @@ class FireBaseUser {
 
   //User Data
   String userId;
-  String userName = "User";
+  String userName ;
   String userTitle = "None";
   // Firebase Phone Auth
   Future<bool> loginStatus() async {
@@ -33,6 +33,7 @@ class FireBaseUser {
           .child(value)
           .once()
           .then((DataSnapshot snap) {
+            this.userName = snap.value['name'];
         return snap.value['name'];
       });
     });
@@ -94,7 +95,7 @@ class FireBaseUser {
   }
 
   Future cardData(timestamp, title, uid, alphanumeric, isVerified, template,
-      thumbnail, body,phone1,phone2) async {
+      thumbnail, body,phone1,phone2,name,reqtitle) async {
     try {
       userUid().then((value) {
         databaseReference.child('posts').push().set({
@@ -103,8 +104,8 @@ class FireBaseUser {
           "template": template,
           "thumbnail": thumbnail,
           "requesterId": this.userId, // Firebase User ID
-          "requesterName": this.userName,
-          "requesterTitle": this.userTitle,
+          "requesterName": name,
+          "requesterTitle": reqtitle,
           "messages": [
             {"body": body, "time": timestamp}
           ],
