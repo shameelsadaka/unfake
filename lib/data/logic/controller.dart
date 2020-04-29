@@ -2,18 +2,18 @@ import 'dart:ui' as ui;
 import 'dart:math';
 import 'dart:typed_data';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:random_string/random_string.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/data/logic/firebase.dart';
 
 class DataHandler {
   final _auth = FireBaseUser();
-  Future<bool> loginStatus() async{
+  Future<bool> loginStatus() async {
     return await _auth.loginStatus();
   }
 
@@ -65,21 +65,21 @@ class DataHandler {
     _auth.updateCard(postid, body);
   }
 
-  Future<CardModel> getCardFromId(String postId){
+  Future<CardModel> getCardFromId(String postId) {
     return _auth.getCardFromId(postId);
   }
+
 
   Future<List<CardModel>> getUserPosts() {
     return _auth.getCardData();
   }
 
-  // 
   //
   //
-  
-  static Future<Uint8List> createImageFromWidget(Widget widget, {Duration wait, Size logicalSize, Size imageSize}) async {
+  //
 
-    
+  static Future<Uint8List> createImageFromWidget(Widget widget,
+      {Duration wait, Size logicalSize, Size imageSize}) async {
     final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
 
     logicalSize ??= ui.window.physicalSize / ui.window.devicePixelRatio;
@@ -89,7 +89,8 @@ class DataHandler {
 
     final RenderView renderView = RenderView(
       window: null,
-      child: RenderPositionedBox(alignment: Alignment.center, child: repaintBoundary),
+      child: RenderPositionedBox(
+          alignment: Alignment.center, child: repaintBoundary),
       configuration: ViewConfiguration(
         size: logicalSize,
         devicePixelRatio: 1.0,
@@ -102,13 +103,13 @@ class DataHandler {
     pipelineOwner.rootNode = renderView;
     renderView.prepareInitialFrame();
 
-    final RenderObjectToWidgetElement<RenderBox> rootElement = RenderObjectToWidgetAdapter<RenderBox>(
-      container: repaintBoundary,
-      child: Directionality(
-          textDirection: TextDirection.ltr,
-          child:widget,
-      )
-    ).attachToRenderTree(buildOwner);
+    final RenderObjectToWidgetElement<RenderBox> rootElement =
+        RenderObjectToWidgetAdapter<RenderBox>(
+            container: repaintBoundary,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: widget,
+            )).attachToRenderTree(buildOwner);
 
     buildOwner.buildScope(rootElement);
 
@@ -123,9 +124,26 @@ class DataHandler {
     pipelineOwner.flushCompositingBits();
     pipelineOwner.flushPaint();
 
-    final ui.Image image = await repaintBoundary.toImage(pixelRatio: imageSize.width / logicalSize.width);
-    final ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final ui.Image image = await repaintBoundary.toImage(
+        pixelRatio: imageSize.width / logicalSize.width);
+    final ByteData byteData =
+        await image.toByteData(format: ui.ImageByteFormat.png);
 
     return byteData.buffer.asUint8List();
   }
+  
+  Future<List> getSavedPosts() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List savedposts =  (prefs.getStringList('saved_posts') ?? []);
+    return savedposts;
+  }
+
+  Future savePostLocally(postid) async{
+    print(postid);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedposts =  (prefs.getStringList('saved_posts') ?? []);
+    savedposts.add(postid);
+    return prefs.setStringList('saved_posts', savedposts);
+  }
+  
 }

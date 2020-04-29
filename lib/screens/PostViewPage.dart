@@ -38,8 +38,6 @@ class _PostViewPageState extends State<PostViewPage> {
       setState(() {
       _loggedInUserId = uid;
       });
-      print(uid);
-      print(cardData.requesterId);
     });
     _reloadPost();
     super.initState();
@@ -121,26 +119,16 @@ class _PostViewPageState extends State<PostViewPage> {
   }
 
   void postAction(String action) {
-    print(action);
-
     switch (action) {
       case "share":
         _shareCardImage();
         break;
       case "report":
         break;
-      case "save":
+      case "savepost":
+        _dataHandler.savePostLocally(cardData.postId);
         break;
     }
-
-    ///
-    ///   To be expanded
-    ///
-    ///   TODO
-    ///   * Extract this function to the controller
-    ///
-    ///   There is a copy of this function in carousel card
-    ///
   }
 
   GlobalKey _globalKey = new GlobalKey();

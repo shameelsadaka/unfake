@@ -9,6 +9,7 @@ import 'screens/LoginPage.dart';
 import 'screens/PostViewPage.dart';
 import 'screens/SetupProfilePage.dart';
 import 'screens/ProfilePage.dart';
+import 'screens/SavedPostsPage.dart';
 import 'screens/NewPostPage.dart';
 
 
@@ -26,6 +27,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context)=>AppLayout(body:ProfilePage()),settings: settings);
     case '/new_post':
       return MaterialPageRoute(builder: (context)=>AppLayout(body:NewPostPage()),settings: settings);
+    case '/saved_posts':
+      return MaterialPageRoute(builder: (context)=>AppLayout(body:SavedPostsPage()),settings: settings);
     default:
       return MaterialPageRoute(builder: (context) => AppLayout(body:Center(child: Text('Page Not Found'))),settings: settings);
   }
