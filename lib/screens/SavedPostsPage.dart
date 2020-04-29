@@ -34,15 +34,19 @@ class SavedPostsPage extends StatelessWidget {
                     builder: (BuildContext context,snap){
                       if(snap.connectionState == ConnectionState.done){
                         List postIds = snap.data;
-                        
                         return Column(
                           children:postIds.map((id)=>
                             FutureBuilder(
                               future: _dataHandler.getCardFromId(id),
                               builder: (BuildContext context,snapshot){
                                 if(snapshot.connectionState == ConnectionState.done){
-                                  CardModel cardData = snapshot.data;
-                                  return MiniCard(cardData:cardData);
+                                  if(snapshot.data != null){
+                                    CardModel cardData = snapshot.data;
+                                    return MiniCard(cardData:cardData);
+                                  }
+                                  else{
+                                    return Container();
+                                  }
                                 }
                                 else{
                                   return Container(
