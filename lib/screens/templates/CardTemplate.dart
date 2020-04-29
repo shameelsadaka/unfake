@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class CardTemplate {
  
-  String _bgImageName;
+  String _bgImageName,templateName;
  
   Color blockColor,titleColor,messageBoxColor,messageColor,subtextColor,miniTitleColor,footerTextColor;
 
@@ -29,7 +29,8 @@ class CardTemplate {
   // Card Templates
 
   CardTemplate.redCard(){
-    this._bgImageName = 'red.png';    
+    this.templateName = "red";
+    this._bgImageName = 'red.png';
     this.blockColor = Color(0xFFFe67d7c);
     this.titleColor = Color(0xFFC40C0C);
     this.messageBoxColor = Color(0x10FF0027);
@@ -39,6 +40,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x99450404);
   }  
   CardTemplate.blueCard(){
+    this.templateName = "blue";
     this._bgImageName = 'blue.png';    
     this.blockColor = Color(0xFF8f7cf0);
     this.titleColor = Color(0xFF480ead);
@@ -49,6 +51,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x9932035e);
   }
   CardTemplate.greenCard(){
+    this.templateName = "green";
     this._bgImageName = 'green.png';    
     this.blockColor = Color(0xFF74cd88);
     this.titleColor = Color(0xFF045c2d);
@@ -59,6 +62,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x9908422d);
   }  
   CardTemplate.yellowCard(){
+    this.templateName = "yellow";
     this._bgImageName = 'yellow.png';    
     this.blockColor = Color(0xFFeec78c);
     this.titleColor = Color(0xFFad6800);
@@ -69,6 +73,7 @@ class CardTemplate {
     this.footerTextColor =  Color(0x994f441a);
   }
   CardTemplate.cyanCard(){
+    this.templateName = "cyan";
     this._bgImageName = 'cyan.png';    
     this.blockColor = Color(0xFF52c2c6);
     this.titleColor = Color(0xFF127ba1);
@@ -89,8 +94,8 @@ class CardTemplate {
     return 'assets/images/cards/'+_bgImageName;
   }
 
-  String get bgImageName {
-    return _bgImageName;
+  String get _templateName{
+    return templateName;
   }
   
   

@@ -56,7 +56,7 @@ class _NewPostPageState extends State<NewPostPage> {
 
 
   void _createNewPost(){
-data.createCard(title.text, message.text, _cardTemplate.bgImageName, _selectedIcon,phone1.text,phone2.text,requestername.text,designation.text);
+data.createCard(title.text, message.text, _cardTemplate.templateName, _selectedIcon,phone1.text,phone2.text,requestername.text,designation.text);
   }
   
 
