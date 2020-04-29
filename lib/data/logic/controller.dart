@@ -139,10 +139,11 @@ class DataHandler {
   }
 
   Future savePostLocally(postid) async{
-    print(postid);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> savedposts =  (prefs.getStringList('saved_posts') ?? []);
-    savedposts.add(postid);
+
+    if(!savedposts.contains(postid))
+      savedposts.add(postid);
     return prefs.setStringList('saved_posts', savedposts);
   }
   
