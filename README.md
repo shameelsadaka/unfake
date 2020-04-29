@@ -1,16 +1,19 @@
-# itstrue
+It's True
 
-A new Flutter project.
+It's True is a project done by Yellow Labs as a social commitment to reduce the use of fake,mystery origin
+requirement/help forward messages with untraceable source.
+
+It's true is considered as a trusted source to generate request messages which helps people to track the updates or present status of the Forward Message.
+
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project uses Firebase realtime database and Phone Authentication for easy scalability.
 
-A few resources to get you started if this is your first Flutter project:
+->Create a Project in Firebase console.firebase.google.com
+->Add google-services.json to /android/app/src
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+->Get all dependency packages by running 'flutter pub get'
+->Run project 'flutter run'
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
