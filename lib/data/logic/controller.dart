@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/data/logic/firebase.dart';
 
+import '../class/CardModel.dart';
+
 class DataHandler {
   final _auth = FireBaseUser();
   Future<bool> loginStatus() async {
@@ -29,7 +31,7 @@ class DataHandler {
     _auth.signOut();
   }
 
-  createCard(title, body, template, thumbnail,phone1,phone2) {
+  createCard(title, body, template, thumbnail,phone1,phone2,name,reqtitle) {
     //Generate Post ID and Card ID
     var isVerified = false;
     //timestamp
@@ -41,12 +43,12 @@ class DataHandler {
 
     //Generate Post ID
     String alpha = randomAlpha(3).toUpperCase();
-    String num = randomBetween(1, 9999).toString();
+    String num = randomBetween(1001, 9999).toString();
     String alphanumeric = alpha + num;
 
     //Passing datas to Firebase Function Class
     _auth.cardData(timeStamp, title, uid, alphanumeric, isVerified, template,
-        thumbnail, body,phone1,phone2);
+        thumbnail, body,phone1,phone2,name,reqtitle);
   }
 
   Future<List<CardModel>> getAllData() {
@@ -138,5 +140,8 @@ class DataHandler {
       savedposts.add(postid);
     return prefs.setStringList('saved_posts', savedposts);
   }
-  
+
+  Future<List<CardModel>> searchCard(postId){
+    return searchCard(postId);
+  }
 }

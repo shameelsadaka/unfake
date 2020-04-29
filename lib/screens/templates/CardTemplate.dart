@@ -89,7 +89,9 @@ class CardTemplate {
     return 'assets/images/cards/'+_bgImageName;
   }
 
-  
+  String get bgImageName {
+    return _bgImageName;
+  }
   
   
 }
