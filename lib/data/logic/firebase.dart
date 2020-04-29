@@ -256,9 +256,11 @@ class FireBaseUser {
         .once()
         .then((DataSnapshot snap) {
       var data = snap.value;
-      var keys = snap.value.keys;
-      for (var key in keys) {
-        cardDataList.add(new CardModel.fromJson(data[key]));
+      if(data != null){
+        var keys = snap.value.keys;
+        for (var key in keys) {
+          cardDataList.add(new CardModel.fromJson(data[key]));
+        }
       }
     });
     return cardDataList;
@@ -274,11 +276,13 @@ class FireBaseUser {
           .equalTo(userid)
           .once()
           .then((DataSnapshot snap) {
-        var data = snap.value;
-        var keys = snap.value.keys;
-        for (var key in keys) {
-          cardDataList.add(new CardModel.fromJson(data[key]));
-        }
+            var data = snap.value;
+            if(data != null){
+              var keys = snap.value.keys;
+              for (var key in keys) {
+                cardDataList.add(new CardModel.fromJson(data[key]));
+              }
+            }
       });
 
     });

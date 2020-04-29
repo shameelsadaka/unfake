@@ -76,19 +76,29 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
 
-                  SizedBox(height: 30),
+                  SizedBox(height: 20),
+                  Text("My Posts",style: TextStyle(fontWeight: FontWeight.bold),),
+                  SizedBox(height: 10),
+
 
                   FutureBuilder(
                     future: _dataHandler.getUserPosts(),
                     builder: (BuildContext context,snap){
                       if(snap.connectionState == ConnectionState.done){
                         List<CardModel> cards = snap.data;
-                        return Column(
-                          children:cards.map((cardData)=>
-                            MiniCard(cardData:cardData,showName: false)
-                          ).toList()
-                          
-                        );
+                        if(cards.length > 0)
+                          return Column(
+                            children:cards.map((cardData)=>
+                              MiniCard(cardData:cardData,showName: false)
+                            ).toList()
+                          );
+                        else
+                          return Center(
+                            child:Padding(
+                              padding: EdgeInsets.only(top:20),
+                              child: Text("No posts to show",style: TextStyle(color: Color(0xFFCCCCCC))),
+                            )
+                          );
                       }
                       else{
                         return Padding(
