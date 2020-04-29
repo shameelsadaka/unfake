@@ -143,10 +143,22 @@ class DataHandler {
     return prefs.setStringList('saved_posts', savedposts);
   }
 
+  Future unsaveLocalPost(postid) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedposts =  (prefs.getStringList('saved_posts') ?? []);
+
+    if(savedposts.contains(postid))
+      savedposts.remove(postid);
+    return prefs.setStringList('saved_posts', savedposts);
+  }
+
   Future<List<CardModel>> searchCard(postId){
     return searchCard(postId);
   }
+  
   writeProfile(name){
     _auth.writeProfile(name);
   }
+
+
 }
