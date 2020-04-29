@@ -89,7 +89,22 @@ class _PostViewPageState extends State<PostViewPage> {
             FlatButton(
               child: Text('UPDATE'),
               onPressed: () {
-                _dataHandler.updateCard(cardData.postId, newUpdateText);
+                _dataHandler.updateCard(cardData.postId, newUpdateText).then((isUpdated){
+                  if(isUpdated == true){
+                    _reloadPost();
+                  }
+                  else{
+                    
+                    Fluttertoast.showToast(
+                      msg: "Unable while updating post. \n Check your internet",
+                      toastLength: Toast.LENGTH_SHORT,
+                      timeInSecForIosWeb: 5,
+                      textColor:Colors.red,
+                      gravity: ToastGravity.CENTER,
+                    );
+                    
+                  }
+                });
                 Navigator.of(context).pop(newUpdateText);
               },
             ),
@@ -367,8 +382,9 @@ class _PostViewPageState extends State<PostViewPage> {
                           if (_viewUpdates)
                             ...cardData.messages
                                 .sublist(1, cardData.messages.length - 1)
+                                .reversed.toList()
                                 .map((msg) => CardMessageBox(
-                                      message: cardData.messages.last,
+                                      message: msg,
                                       cardTemplate: cardData.cardTemplate,
                                       important: false,
                                     ))

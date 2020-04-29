@@ -56,7 +56,7 @@ class DataHandler {
   }
 
   Future updateCard(postid, body) {
-    _auth.updateCard(postid, body);
+    return _auth.updateCard(postid, body);
   }
 
   Future<CardModel> getCardFromId(String postId) {
