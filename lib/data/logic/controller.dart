@@ -149,4 +149,7 @@ class DataHandler {
   writeProfile(name){
     _auth.writeProfile(name);
   }
+  reportCard(postid){
+    _auth.reportCard(postid);
+  }
 }

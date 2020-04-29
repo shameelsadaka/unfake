@@ -19,6 +19,13 @@ class CarouselCard extends StatelessWidget {
     void postAction(String action) {
     switch (action) {
       case "report":
+        _dataHandler.reportCard(cardData.postId);
+          Fluttertoast.showToast(
+            msg: "${cardData.postId} reported Succesfully",
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 3,
+            gravity: ToastGravity.BOTTOM,
+          );
         break;
       case "savepost":
         _dataHandler.savePostLocally(cardData.postId).then((value){

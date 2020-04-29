@@ -196,14 +196,14 @@ class FireBaseUser {
           return false;
         } else {
           for (var key in keys) {
-            var count = data[key]['reports'].length;
-            //Set Status of Card to False if reported by 3 persons
-            if (count >= 2) {
-              databaseReference
-                  .child('posts')
-                  .child(key)
-                  .set({"status": false});
-            }
+//            var count = data[key]['reports'].length;
+//            //Set Status of Card to False if reported by 3 persons
+//            if (count >= 2) {
+//              databaseReference
+//                  .child('posts')
+//                  .child(key)
+//                  .set({"status": false});
+//            }
             //Adding reported user info to report tag
             databaseReference
                 .child('posts')
