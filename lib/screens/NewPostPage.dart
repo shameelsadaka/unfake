@@ -24,8 +24,23 @@ class _NewPostPageState extends State<NewPostPage> {
   ];
   final String _iconsDirectory = 'assets/images/icons/';
   final List<String> _cardIcons = [
+    'blood.png',
+    'rice.png',
+    'message.png',
+    'money.png',
+    'shirt.png',
+    'box.png',
+    'bell.png',
+    'briefcase.png',
+    'boy.png',
+    'frock.png',
+    'girl.png',
+    'missing.png',
+    'nuclear.png',
+    'three_hand.png',
+    'soup_icon.png',
     'blood_icon_red.png',
-    'soup_icon.png'
+    
   ];
 
 

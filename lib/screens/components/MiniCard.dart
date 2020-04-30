@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/data/logic/controller.dart';
+import 'package:itstrue/screens/components/CardStatusWidget.dart';
 
 class MiniCard extends StatelessWidget {
   final CardModel cardData;
@@ -75,7 +76,7 @@ class MiniCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
 
-
+              
 
               /**
                * Card Title 
