@@ -12,8 +12,7 @@ requirement/help forward messages with untraceable source.</p>
     - [Firebase](#firebase)
     - [Git](#git)
 - [Getting started](#getting-started)
-    - [Setting up a development environment](#setting-up-a-development-environment)
-    - [Setup using docker-compose](#setup-using-docker-compose)
+    - [Setting up project](#setting-up-a-development-environment)
 <hr>
 ### Requirements
 [^top](#table-of-contents)
