@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Sign in to Your Account",
+                  "Sign in to Your Account or Create One",
                   style: TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w900,

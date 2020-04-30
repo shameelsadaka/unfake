@@ -5,7 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/data/logic/controller.dart';
+
 import 'package:itstrue/screens/components/CardMessageBox.dart';
+import 'package:itstrue/screens/components/CardStatusWidget.dart';
 
 class CarouselCard extends StatelessWidget {
   final CardModel cardData;
@@ -66,6 +68,7 @@ class CarouselCard extends StatelessWidget {
           Navigator.of(context).pushNamed('/post',arguments:cardData);
         },
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             /**
              * Card Top
@@ -137,6 +140,13 @@ class CarouselCard extends StatelessWidget {
                 ],
               ),
             ),
+
+            
+            /**
+             * Card Staus
+             */
+            CardStatusWidget(status: cardData.cardStatus),
+            
 
             /**
              * Card Title & Icon    

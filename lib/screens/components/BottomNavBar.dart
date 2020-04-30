@@ -12,8 +12,8 @@ class BottomNavBar extends StatelessWidget {
 
   final List<BottomNavItem> bottomIcons = [
     BottomNavItem('Home','/home',Icons.home),
+    BottomNavItem('New Post','/new_post',Icons.add_box),
     BottomNavItem('Saved Posts','/saved_posts',Icons.bookmark),
-    null,
     BottomNavItem('My Posts','/profile',Icons.mode_comment),
     BottomNavItem('Settings','/settings',Icons.settings),
   ];
@@ -23,9 +23,9 @@ class BottomNavBar extends StatelessWidget {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: bottomIcons.map((item){
-          return item == null?new SizedBox(width: 50):BottomNavBarItemUI(icon:item.icon,name:item.name,route:item.routeName,isActive: ModalRoute.of(context).settings.name == item.routeName);
+          return Expanded(child: BottomNavBarItemUI(icon:item.icon,name:item.name,route:item.routeName,isActive: ModalRoute.of(context).settings.name == item.routeName));
         }).toList(),
       ),
     );
@@ -60,7 +60,8 @@ class BottomNavBarItemUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: (){
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      onPressed: (){  
         if(!isActive){
           Navigator.of(context).pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false); 
         }

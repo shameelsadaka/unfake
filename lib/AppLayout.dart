@@ -59,16 +59,20 @@ class AppLayout extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavBar(),
-      floatingActionButton:FloatingActionButton(
-        onPressed: (){
-          Navigator.of(context).pushNamed('/new_post');
-        },
-        tooltip: 'Create New Post',
-        child: Icon(Icons.add, size: 30.0),
-        backgroundColor: Theme.of(context).primaryColor,
-      )
-      ,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      
+      
+      // floatingActionButton:FloatingActionButton(
+      //   onPressed: (){
+      //     Navigator.of(context).pushNamed('/new_post');
+      //   },
+      //   tooltip: 'Create New Post',
+      //   child: Icon(Icons.add, size: 30.0),
+      //   backgroundColor: Theme.of(context).primaryColor,
+      // )
+      // ,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      
     );
   }
 

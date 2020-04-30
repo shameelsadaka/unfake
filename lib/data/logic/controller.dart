@@ -145,18 +145,28 @@ class DataHandler {
     return prefs.setStringList('saved_posts', savedposts);
   }
 
-  Future<CardModel> searchCard(String postId){
+  Future<CardModel> searchCard(String postId) {
     print(postId);
-    if(postId.length == 7)
-      {
-        return _auth.searchCard(postId);
-      }
-
+    if (postId.length == 7) {
+      return _auth.searchCard(postId);
+    }
   }
+
+  Future unsaveLocalPost(postid) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedposts =  (prefs.getStringList('saved_posts') ?? []);
+
+    if(savedposts.contains(postid))
+      savedposts.remove(postid);
+    return prefs.setStringList('saved_posts', savedposts);
+  }
+
+  
   writeProfile(name){
     _auth.writeProfile(name);
   }
   reportCard(postid){
     _auth.reportCard(postid);
   }
+
 }

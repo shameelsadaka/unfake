@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart';
 import 'package:itstrue/screens/templates/CardTemplate.dart';
 
+enum CardStatus {open,closed,deleted,important,blocked,fake,reported}
+
 class CardModel {
   final String postId;
   final String title;
@@ -14,27 +16,43 @@ class CardModel {
   final int verifiedCount;
   final List<CardMessage> messages;
   final List<String> contacts;
+  final CardStatus cardStatus;
+
+  
+  
+
 
   CardTemplate get cardTemplate {
     return CardTemplate.fromColor(template);
   }
 
   CardModel({
-      this.postId,
-      this.title,
-      this.template,
-      this.thumbnail,
-      this.requesterId,
-      this.requesterName,
-      this.requesterTitle,
-      this.isVerified,
-      this.verification,
-      this.verifiedCount,
-      this.messages,
-      this.contacts});
+    this.postId,
+    this.title,
+    this.template,
+    this.thumbnail,
+    this.requesterId,
+    this.requesterName,
+    this.requesterTitle,
+    this.isVerified,
+    this.verification,
+    this.verifiedCount,
+    this.messages,
+    this.contacts,
+    this.cardStatus
+  });
 
   factory CardModel.fromJson(var json) {
     Map<String, dynamic> parsedJson = Map<String, dynamic>.from(json);
+    CardStatus _cardStatus = CardStatus.open;
+    
+    CardStatus.values.forEach((e){
+      if (e.toString() == parsedJson['cardStatus']) {
+        _cardStatus = e;
+      }
+    });
+
+
     return CardModel(
         postId: parsedJson['postId'],
         title: parsedJson['title'],
@@ -47,7 +65,8 @@ class CardModel {
         verification: parsedJson['verification'],
         verifiedCount: parsedJson['verifiedCount'],
         contacts: new List<String>.from(parsedJson['contacts']),
-        messages: parseMessages(json['messages'])
+        messages: parseMessages(json['messages']),
+        cardStatus: _cardStatus
     );
   }
 

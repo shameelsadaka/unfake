@@ -12,12 +12,12 @@ class SavedPostsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     _dataHandler.loginStatus().then((isLoggedIn){
       if(isLoggedIn == false){
           Navigator.of(context).pushReplacementNamed('/login');
       }
     });
+
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
@@ -32,31 +32,46 @@ class SavedPostsPage extends StatelessWidget {
                     builder: (BuildContext context,snap){
                       if(snap.connectionState == ConnectionState.done){
                         List postIds = snap.data;
-                        
-                        return Column(
-                          children:postIds.map((id)=>
-                            FutureBuilder(
-                              future: _dataHandler.getCardFromId(id),
-                              builder: (BuildContext context,snapshot){
-                                if(snapshot.connectionState == ConnectionState.done){
-                                  CardModel cardData = snapshot.data;
-                                  return MiniCard(cardData:cardData);
-                                }
-                                else{
-                                  return Container(
-                                    margin: const EdgeInsets.all(8),
-                                    padding: EdgeInsets.all(30),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Color(0xFFEEEEEE)
-                                    ),
-                                  );
-                                }
-                                
-                              },
-                            )
-                          ).toList()
-                        );
+                        if(postIds.length > 0)
+                          return Column(
+                            children:postIds.map((id)=>
+                              FutureBuilder(
+                                future: _dataHandler.getCardFromId(id),
+                                builder: (BuildContext context,snapshot){
+                                  if(snapshot.connectionState == ConnectionState.done){
+                                    if(snapshot.data != null){
+                                      CardModel cardData = snapshot.data;
+                                      return MiniCard(cardData:cardData,isPostSaved: true);
+                                    }
+                                    else{
+                                      return Container();
+                                    }
+                                  }
+                                  else{
+                                    return Container(
+                                      margin: const EdgeInsets.all(8),
+                                      padding: EdgeInsets.all(30),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Color(0xFFEEEEEE)
+                                      ),
+                                    );
+                                  }
+                                  
+                                },
+                              )
+                            ).toList()
+                          );
+                        else 
+                          return Center(                            
+                            child: Column(
+                              children: <Widget>[
+                                Icon(Icons.bookmark,size: 40,color: Colors.grey[300]),
+                                SizedBox(height: 10),
+                                Text("You have not save any posts.\n Save a post for fast access.",style: TextStyle(color: Colors.grey[500]))
+                              ]
+                            ),
+                          );
 
                      }
                       else{

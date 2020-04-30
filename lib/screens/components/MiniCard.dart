@@ -1,10 +1,46 @@
 import 'package:flutter/material.dart';
+
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:itstrue/data/class/CardModel.dart';
+import 'package:itstrue/data/logic/controller.dart';
+import 'package:itstrue/screens/components/CardStatusWidget.dart';
 
 class MiniCard extends StatelessWidget {
   final CardModel cardData;
   final bool showName;
-  MiniCard({Key key, this.cardData,this.showName = false}) : super(key: key);    
+  final bool isPostSaved;
+  
+  final DataHandler _dataHandler = DataHandler();
+  MiniCard({Key key, this.cardData,this.showName = false,this.isPostSaved = false}) : super(key: key);    
+  
+  void _tryPostRemove(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                _dataHandler.unsaveLocalPost(cardData.postId).then((value){
+                  Fluttertoast.showToast(
+                    msg: "Post Removed from Saved List",
+                    toastLength: Toast.LENGTH_SHORT,
+                    timeInSecForIosWeb: 3,
+                    gravity: ToastGravity.BOTTOM,
+                  );
+                  Navigator.of(context).pushReplacementNamed('/saved_posts');
+                });
+              },
+              child: const Text('Remove From Saved Posts'),
+            ),
+          ],
+        );
+      }
+    );
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +65,18 @@ class MiniCard extends StatelessWidget {
         onTap: (){
           Navigator.of(context).pushNamed('/post',arguments:cardData);
         },
+        onLongPress: (){
+          if(isPostSaved){
+            _tryPostRemove(context);
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
 
-
+              
 
               /**
                * Card Title 

@@ -24,8 +24,23 @@ class _NewPostPageState extends State<NewPostPage> {
   ];
   final String _iconsDirectory = 'assets/images/icons/';
   final List<String> _cardIcons = [
+    'blood.png',
+    'rice.png',
+    'message.png',
+    'money.png',
+    'shirt.png',
+    'box.png',
+    'bell.png',
+    'briefcase.png',
+    'boy.png',
+    'frock.png',
+    'girl.png',
+    'missing.png',
+    'nuclear.png',
+    'three_hand.png',
+    'soup_icon.png',
     'blood_icon_red.png',
-    'soup_icon.png'
+    
   ];
 
 
@@ -64,12 +79,18 @@ data.createCard(title.text, message.text, _cardTemplate.templateName, _selectedI
 
   @override
   Widget build(BuildContext context) {
-    data.getUserName().then((completed){
-
+    data.loginStatus().then((isLoggedIn){
+      if(isLoggedIn == false){
+          Navigator.of(context).pushReplacementNamed('/login');
+      }
+      
+      data.getUserName().then((completed){
       if(completed == null)
       {
         Navigator.of(context).pushReplacementNamed('/setup_profile');
       }
+    });
+
     });
     return Expanded(
       child: SingleChildScrollView(
