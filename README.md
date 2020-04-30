@@ -14,15 +14,6 @@ requirement/help forward messages with untraceable source.</p>
 - [Getting started](#getting-started)
     - [Setting up a development environment](#setting-up-a-development-environment)
     - [Setup using docker-compose](#setup-using-docker-compose)
-- [Creating migration files](#creating-migration-files)
-- [Running tests](#running-tests)
-- [Enable HTTPS connections](#enable-https-connections)
-- [How can you help?](#how-can-you-help)
-    - [Verification of Rescue Requests](#verification-of-rescue-requests)
-    - [Contribution Guidelines](#contribution-guidelines)
-    - [Testing PRs](#by-testing)
-    - [Submitting PRs](#submitting-pull-requests)
-
 <hr>
 ### Requirements
 [^top](#table-of-contents)
@@ -42,7 +33,7 @@ requirement/help forward messages with untraceable source.</p>
 [^top](#table-of-contents)
 
 
-### Setting up environment
+### Setting up project
 
 
 <details>
@@ -65,19 +56,15 @@ requirement/help forward messages with untraceable source.</p>
 <details>
 <summary>3. Add Firebase </summary>
 
-  ->Create a Project in Firebase.
-  ->Enable Firebase Phone Authentication
-  ->Enable Realtime database
+  ->Create a Project in Firebase.<br>
+  ->Enable Firebase Phone Authentication<br>
+  ->Enable Realtime database<br>
 
 
 </details>
 <summary>3. Install dependencies.</summary>
 
-```
-flutter pub get
-```
-
-
+  flutter pub get
 
 </details>
 
