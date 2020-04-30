@@ -56,15 +56,16 @@ requirement/help forward messages with untraceable source.</p>
 <details>
 <summary>3. Add Firebase </summary>
 
-  ->Create a Project in Firebase.<br>
-  ->Enable Firebase Phone Authentication<br>
-  ->Enable Realtime database<br>
+  - Create a Project in Firebase.
+  - Enable Firebase Phone Authentication.
+  - Enable Realtime database.
 
 
 </details>
+<details>
 <summary>3. Install dependencies.</summary>
 
-  flutter pub get
+    flutter pub get
 
 </details>
 
@@ -72,6 +73,7 @@ requirement/help forward messages with untraceable source.</p>
 <summary>4. Run Project in real device.</summary>
 
         flutter run
+
 </details>
 
 
