@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:itstrue/data/class/CardModel.dart';
-import 'package:itstrue/screens/components/CardMessageBox.dart';
 
+import 'package:itstrue/screens/components/CardMessageBox.dart';
+import 'package:itstrue/screens/components/CardStatusWidget.dart';
 
 class SharableCard extends StatelessWidget {
   final CardModel cardData;
@@ -105,6 +106,15 @@ class SharableCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                            
+
+                            
+                  /**
+                   * Card Staus
+                   */
+                  CardStatusWidget(status: cardData.cardStatus),
+                                    
+                  
 
                   /**
                    * Card Title & Icon    

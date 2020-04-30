@@ -15,12 +15,20 @@ class HomeCarousel extends StatefulWidget {
 
 class _HomeCarouselState extends State<HomeCarousel> {
   List cardList =  [];
-
   @override
   void initState(){
     DataHandler().getAllData().then((List<CardModel> cards){
       cards.forEach((card){
-        cardList.add(card);
+        
+        switch(card.cardStatus){
+          case CardStatus.open:
+          case CardStatus.important:
+            cardList.add(card);
+            break;
+          default:
+            break;
+        }
+        
       });
       setState(() {
         cardList=cardList;

@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:itstrue/data/class/CardModel.dart';
 import 'package:itstrue/screens/components/SharableCard.dart';
 import 'package:itstrue/screens/components/CardMessageBox.dart';
+import 'package:itstrue/screens/components/CardStatusWidget.dart';
 
 import 'package:itstrue/data/logic/controller.dart';
 
@@ -280,6 +281,16 @@ class _PostViewPageState extends State<PostViewPage> {
                           ],
                         ),
                       ),
+
+                      
+
+                                
+                      /**
+                       * Card Staus
+                       */
+                      CardStatusWidget(status: cardData.cardStatus),
+                                                  
+                      
 
                       /**
                      * Card Title & Icon    
