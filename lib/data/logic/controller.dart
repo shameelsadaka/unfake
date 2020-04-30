@@ -27,8 +27,10 @@ class DataHandler {
     return _auth.userUid();
   }
 
-  signOut() {
+  signOut() async{
     _auth.signOut();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("saved_posts");
   }
 
   createCard(title, body, template, thumbnail,phone1,phone2,name,reqtitle) {
@@ -143,8 +145,13 @@ class DataHandler {
     return prefs.setStringList('saved_posts', savedposts);
   }
 
-  Future<List<CardModel>> searchCard(postId){
-    return searchCard(postId);
+  Future<CardModel> searchCard(String postId){
+    print(postId);
+    if(postId.length == 7)
+      {
+        return _auth.searchCard(postId);
+      }
+
   }
   writeProfile(name){
     _auth.writeProfile(name);

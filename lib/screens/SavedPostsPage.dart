@@ -18,8 +18,6 @@ class SavedPostsPage extends StatelessWidget {
           Navigator.of(context).pushReplacementNamed('/login');
       }
     });
-
-
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
