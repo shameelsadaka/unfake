@@ -1,6 +1,6 @@
 <h1 align="center">It's True</h1>
 
-<p align="center">A project done by Yellow Labs as a social commitment to reduce the use of fake, mystery origin
+<p align="center">A project done by YKnots as a social commitment to reduce the use of fake, mystery origin
 requirement/help forward messages with untraceable source.</p>
 
 
