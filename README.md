@@ -15,7 +15,6 @@ requirement/help forward messages with untraceable source.</p>
     - [Setting up project](#setting-up-a-development-environment)
 <hr>
 ### Requirements
-[^top](#table-of-contents)
 
 
 #### [Flutter](https://flutter.dev/docs/get-started/install)
