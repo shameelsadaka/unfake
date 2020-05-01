@@ -42,22 +42,14 @@ requirement/help forward messages with untraceable source.</p>
     cd unfake
 </details>
 <details>
-<summary>2. Create Firebase Project</summary>
-
-  ->Create a Project in Firebase.
-  ->Follow the steps to connect Firebase with our App.
-  ->Add google-services.json to android/app/src
-  ->Enable Firebase Phone Authentication
-  ->Enable Realtime database
-
-
-</details>
-<details>
-<summary>3. Add Firebase </summary>
+<summary>2. Create Firebase Project and Connect to Flutter App</summary>
 
   - Create a Project in Firebase.
-  - Enable Firebase Phone Authentication.
-  - Enable Realtime database.
+  - Follow the steps to connect Firebase with our App.
+        - https://firebase.google.com/docs/flutter/setup
+  - Add google-services.json to android/app/src
+  - Enable Firebase Phone Authentication
+  - Enable Realtime database
 
 
 </details>
