@@ -1,19 +1,80 @@
-It's True
+<h1 align="center">It's True</h1>
 
-It's True is a project done by Yellow Labs as a social commitment to reduce the use of fake,mystery origin
-requirement/help forward messages with untraceable source.
-
-It's true is considered as a trusted source to generate request messages which helps people to track the updates or present status of the Forward Message.
+<p align="center">A project done by Yellow Labs as a social commitment to reduce the use of fake, mystery origin
+requirement/help forward messages with untraceable source.</p>
 
 
+<!-- It's true is considered as a trusted source to generate request messages which helps people to track the updates or present status of the Forward Message. -->
 
-## Getting Started
+## Table of Contents
+- [Requirements](#requirements)
+    - [Flutter](#flutter)
+    - [Firebase](#firebase)
+    - [Git](#git)
+- [Getting started](#getting-started)
+    - [Setting up project](#setting-up-a-development-environment)
+<hr>
+### Requirements
+[^top](#table-of-contents)
 
-This project uses Firebase realtime database and Phone Authentication for easy scalability.
 
-->Create a Project in Firebase console.firebase.google.com
-->Add google-services.json to /android/app/src
+#### [Flutter](https://flutter.dev/docs/get-started/install)
 
-->Get all dependency packages by running 'flutter pub get'
-->Run project 'flutter run'
+#### [Firebase](firebase.google.com/)
 
+#### [Git](https://git-scm.com/downloads)
+
+</details>
+
+<hr>
+
+### Getting Started
+[^top](#table-of-contents)
+
+
+### Setting up project
+
+
+<details>
+<summary>1. Clone the repo.</summary>
+
+    git clone https://github.com/shameelsadaka/unfake
+    cd unfake
+</details>
+<details>
+<summary>2. Create Firebase Project</summary>
+
+  ->Create a Project in Firebase.
+  ->Follow the steps to connect Firebase with our App.
+  ->Add google-services.json to android/app/src
+  ->Enable Firebase Phone Authentication
+  ->Enable Realtime database
+
+
+</details>
+<details>
+<summary>3. Add Firebase </summary>
+
+  - Create a Project in Firebase.
+  - Enable Firebase Phone Authentication.
+  - Enable Realtime database.
+
+
+</details>
+<details>
+<summary>3. Install dependencies.</summary>
+
+    flutter pub get
+
+</details>
+
+<details>
+<summary>4. Run Project in real device.</summary>
+
+        flutter run
+
+</details>
+
+
+
+<hr>

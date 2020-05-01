@@ -12,6 +12,11 @@ class SavedPostsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _dataHandler.loginStatus().then((isLoggedIn){
+      if(isLoggedIn == false){
+          Navigator.of(context).pushReplacementNamed('/login');
+      }
+    });
 
     return Expanded(
       child: SingleChildScrollView(

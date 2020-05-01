@@ -140,6 +140,13 @@ class _PostViewPageState extends State<PostViewPage> {
         _shareCardImage();
         break;
       case "report":
+        _dataHandler.reportCard(cardData.postId);
+        Fluttertoast.showToast(
+          msg: "${cardData.postId} reported Succesfully",
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 3,
+          gravity: ToastGravity.BOTTOM,
+        );
         break;
       case "savepost":
         _dataHandler.savePostLocally(cardData.postId);

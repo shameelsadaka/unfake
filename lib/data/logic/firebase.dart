@@ -201,14 +201,14 @@ class FireBaseUser {
           return false;
         } else {
           for (var key in keys) {
-            var count = data[key]['reports'].length;
-            //Set Status of Card to False if reported by 3 persons
-            if (count >= 2) {
-              databaseReference
-                  .child('posts')
-                  .child(key)
-                  .set({"status": false});
-            }
+//            var count = data[key]['reports'].length;
+//            //Set Status of Card to False if reported by 3 persons
+//            if (count >= 2) {
+//              databaseReference
+//                  .child('posts')
+//                  .child(key)
+//                  .set({"status": false});
+//            }
             //Adding reported user info to report tag
             databaseReference
                 .child('posts')
@@ -235,29 +235,23 @@ class FireBaseUser {
       });
     });
   }
-
-  searchCard(postId) {
-    List<CardModel> searchedCardData = [];
-    FirebaseDatabase.instance
+  Future<CardModel>searchCard(String postId) async{
+    CardModel searchedCardData;
+    print("Post id in firebase $postId");
+    await FirebaseDatabase.instance
         .reference()
+        .child('posts')
         .orderByChild('postId')
         .equalTo(postId)
         .once()
         .then((DataSnapshot snap) {
-      var data = snap.value;
-      var keys = snap.value.keys;
-      if (data != null) {
-        for (var key in keys) {
-          searchedCardData.add(new CardModel.fromJson(data[key]));
-        }
-      } else {
-        return null;
-      }
-      return null;
+      var key = snap.value.keys.first;
+      searchedCardData = new CardModel.fromJson(snap.value[key]);
+    }).catchError((e) {
+      print("Error while searching Card $e");
     });
     return searchedCardData;
   }
-
   Future<List<CardModel>> getCardData() async {
     List<CardModel> cardDataList = [];
     await FirebaseDatabase.instance
@@ -311,8 +305,10 @@ class FireBaseUser {
       var key = snap.value.keys.first;
       card = new CardModel.fromJson(snap.value[key]);
     }).catchError((e) {
-      print("Error while accessing card");
+      print("Error while accessing card + $e");
     });
     return card;
   }
+
+
 }
