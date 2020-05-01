@@ -13,6 +13,8 @@ class ItsTrueApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appName = 'ItsTrue';
     return MaterialApp(
+      
+      debugShowCheckedModeBanner: false,
       title: appName,
       theme: getThemeData(), // Theme Data is Set in theme.dart
       initialRoute: '/home',
