@@ -146,10 +146,7 @@ class DataHandler {
   }
 
   Future<CardModel> searchCard(String postId) {
-    print(postId);
-    if (postId.length == 7) {
       return _auth.searchCard(postId);
-    }
   }
 
   Future unsaveLocalPost(postid) async{

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:itstrue/data/class/CardModel.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:itstrue/screens/components/MiniCard.dart';
 
 //Components
@@ -11,18 +12,17 @@ bool isEmpty(String s) => s == null || s.isEmpty;
 
 
 class HomePage extends StatefulWidget {
-  CardModel cardData;
-  HomePage({this.cardData});
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  CardModel cardData;
   FocusNode _searchBoxFocus = new FocusNode();
 
   bool _isSearching;
   String _searchString;
+  bool _searchLoading = false;
+  CardModel _searchResult;
   final _searchBoxController = TextEditingController();
 
   final data = DataHandler();
@@ -43,19 +43,43 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future _updateSearchString(){
+  void _updateSearchString(){
     String newSearch =_searchBoxController.text;
     setState((){
-
       _searchString = newSearch;
+      _searchResult = null;
     });
-
-    // Handle Search Requests
-
   }
 
-  Future<CardModel> _searchData (){
-    return data.searchCard(_searchString.toUpperCase());
+  void _searchCard(){
+      setState(() {
+        _searchLoading = true;
+      });
+
+      data.searchCard(_searchString.toUpperCase()).then((CardModel post){
+        if(post != null){
+          _searchResult = post;
+        }
+        else{
+            Fluttertoast.showToast(
+              msg: "Post Not Found",
+              toastLength: Toast.LENGTH_SHORT,
+              timeInSecForIosWeb: 5,
+              gravity: ToastGravity.CENTER,
+            );
+        }
+      }).catchError((e){
+        Fluttertoast.showToast(
+          msg: "Unable to search for the post.\n Check your internet",
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 5,
+          gravity: ToastGravity.CENTER,
+        );
+      }).whenComplete((){
+        setState(() {
+          _searchLoading = false;
+        });
+      });        
   }
 
   void _clearSearchBox(){
@@ -177,35 +201,29 @@ class _HomePageState extends State<HomePage> {
                       child: Center(
                         child: Column(
                           children: <Widget>[
-                            FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.green)
-                              ),
-                              onPressed: (){
-                                data.searchCard(_searchString.toUpperCase());
-                                setState(() {
-                                  _searchString=null;
-                                  Navigator.of(context).pushNamed('/post',arguments:cardData);
-                                });
-//                                FutureBuilder(
-//                                    future: data.searchCard(_searchString.toUpperCase()),
-//                                    builder: (BuildContext context,snap){
-//                                      if(snap.connectionState == ConnectionState.done){
-//                                        CardModel cards = snap.data;
-//                                        return Container(
-//                                            child:MiniCard(cardData:cardData,showName: false)
-//                                        );}
-//                                    });
-                              },
-                              child: const Text(
-                                  'GO',
-                                  style: TextStyle(fontSize: 20)
-                              ),
+                            if(_searchLoading == true)
+                              Padding(
+                                padding: const EdgeInsets.only(top:30.0),
+                                child: CircularProgressIndicator(strokeWidth: 2,valueColor: new AlwaysStoppedAnimation<Color>(Colors.green)),
+                              )
+                            else
+                            (
+                              _searchResult != null?
+                              MiniCard(cardData: _searchResult)
+                              :
+                              FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: new BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.green)
+                                ),
+                                onPressed: _searchCard,
+                                child: const Text(
+                                    'GO',
+                                    style: TextStyle(fontSize: 20)
+                                ),
 
-                            ),
-                            SizedBox(height: 60),
-                            CircularProgressIndicator(strokeWidth: 2,valueColor: new AlwaysStoppedAnimation<Color>(Colors.green)),
+                              )
+                            )
 
                           ],
 

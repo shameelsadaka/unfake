@@ -235,22 +235,27 @@ class FireBaseUser {
       });
     });
   }
-  Future<CardModel>searchCard(String postId) async{
-    CardModel searchedCardData;
-    print("Post id in firebase $postId");
-    await FirebaseDatabase.instance
+  Future<CardModel> searchCard(String postId) async{
+    return FirebaseDatabase.instance
         .reference()
         .child('posts')
         .orderByChild('postId')
         .equalTo(postId)
         .once()
         .then((DataSnapshot snap) {
-      var key = snap.value.keys.first;
-      searchedCardData = new CardModel.fromJson(snap.value[key]);
+          var data = snap.value;
+          if(data != null){
+            var key = snap.value.keys.first;
+            return new CardModel.fromJson(snap.value[key]);
+          }
+          else
+          {
+            return null;
+          }
     }).catchError((e) {
       print("Error while searching Card $e");
+      return null;
     });
-    return searchedCardData;
   }
   Future<List<CardModel>> getCardData() async {
     List<CardModel> cardDataList = [];
