@@ -20,7 +20,7 @@ requirement/help forward messages with untraceable source.</p>
 
 #### [Flutter](https://flutter.dev/docs/get-started/install)
 
-#### [Firebase](firebase.google.com/)
+#### [Firebase](https://firebase.google.com/)
 
 #### [Git](https://git-scm.com/downloads)
 
