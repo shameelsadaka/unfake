@@ -206,6 +206,7 @@ class _LoginPageState extends State<LoginPage> {
         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: TextField(
             key: UniqueKey(),
+            obscureText: true,
             onChanged: (value) {
               this._otpCode = value;
             },
