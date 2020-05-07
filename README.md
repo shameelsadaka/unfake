@@ -1,6 +1,6 @@
 <h1 align="center">It's True</h1>
 
-<p align="center">A project done by Yellow Labs as a social commitment to reduce the use of fake, mystery origin
+<p align="center">A project done by YKnots as a social commitment to reduce the use of fake, mystery origin
 requirement/help forward messages with untraceable source.</p>
 
 
@@ -14,13 +14,13 @@ requirement/help forward messages with untraceable source.</p>
 - [Getting started](#getting-started)
     - [Setting up project](#setting-up-a-development-environment)
 <hr>
+
 ### Requirements
-[^top](#table-of-contents)
 
 
 #### [Flutter](https://flutter.dev/docs/get-started/install)
 
-#### [Firebase](firebase.google.com/)
+#### [Firebase](https://firebase.google.com/)
 
 #### [Git](https://git-scm.com/downloads)
 
@@ -42,22 +42,14 @@ requirement/help forward messages with untraceable source.</p>
     cd unfake
 </details>
 <details>
-<summary>2. Create Firebase Project</summary>
-
-  ->Create a Project in Firebase.
-  ->Follow the steps to connect Firebase with our App.
-  ->Add google-services.json to android/app/src
-  ->Enable Firebase Phone Authentication
-  ->Enable Realtime database
-
-
-</details>
-<details>
-<summary>3. Add Firebase </summary>
+<summary>2. Create Firebase Project and Connect to Flutter App</summary>
 
   - Create a Project in Firebase.
-  - Enable Firebase Phone Authentication.
-  - Enable Realtime database.
+  - Follow the steps to connect Firebase with our App.
+        - https://firebase.google.com/docs/flutter/setup
+  - Add google-services.json to android/app/src
+  - Enable Firebase Phone Authentication
+  - Enable Realtime database
 
 
 </details>
